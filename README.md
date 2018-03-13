@@ -1,6 +1,6 @@
-# manage_system-vue
+# manageSystem-vue
 
-> A Vue.js project
+> 外卖后台管理系统
 
 ## Build Setup
 
@@ -17,5 +17,3 @@ npm run build
 # build for production and view the bundle analyzer report
 npm run build --report
 ```
-
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
