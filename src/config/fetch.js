@@ -38,7 +38,7 @@ service.interceptors.response.use(response => {
  * 封装 get 请求
  */
 
-const fetchGet = (url, param) => {
+ export default (url, param) => {
     return new Promise((resolve, reject) => {
         service.get(url, {
             params: param
@@ -50,8 +50,4 @@ const fetchGet = (url, param) => {
             reject(error);
         });
     });
-}
-
-export {
-    fetchGet
 }
