@@ -35,7 +35,7 @@ service.interceptors.response.use(response => {
 });
 
 /**
- * 封装 get 请求
+ * 封装请求
  */
 
  export default (url, param) => {
@@ -44,7 +44,7 @@ service.interceptors.response.use(response => {
             params: param
         })
         .then(response => {
-            resolve(response);
+            resolve(response.data);
         })
         .catch(error => {
             reject(error);
