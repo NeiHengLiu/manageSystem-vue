@@ -13,7 +13,7 @@
                         <el-input type="password" v-model="loginForm.userPwd" placeholder="密码"></el-input>
                     </el-form-item>
                     <el-form-item>
-                        <el-button type="primary" @click="submitForm('loginForm')" class="submit_btn">登陆</el-button>
+                        <el-button type="primary" @click="submitForm('loginForm')" class="submit_btn">登录</el-button>
                     </el-form-item>
                 </el-form>
                 <p class="tip">温馨提示:</p>
@@ -49,11 +49,11 @@
         methods: {
             submitForm(formName) {
                 this.$refs[formName].validate((valid) =>{
-                    console.log(valid);
                     if(valid){
-
-                    } else {
-
+                        this.$message({
+                            type: 'success',
+                            message: '登录成功'
+                        });
                     }
                 })
             }
