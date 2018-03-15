@@ -1,19 +1,19 @@
 <template>
     <div class="login_page wah_100">
         <transition name="form-fade">
-            <section class="login_center" v-show="loginShow">
+            <section class="login_center" v-show="showLogin">
                 <div class="login_title">
                     <p>外卖后台管理系统</p>
                 </div>
-                <el-form ref="loginFrom" :model="loginFrom">
-                    <el-form-item>
-                        <el-input v-model="loginFrom.userName" placeholder="用户名"></el-input>
+                <el-form ref="loginForm" :model="loginForm" :rules="rules">
+                    <el-form-item prop="userName">
+                        <el-input v-model="loginForm.userName" placeholder="用户名"></el-input>
+                    </el-form-item>
+                    <el-form-item prop="userPwd">
+                        <el-input type="password" v-model="loginForm.userPwd" placeholder="密码"></el-input>
                     </el-form-item>
                     <el-form-item>
-                        <el-input type="password" v-model="loginFrom.userPwd" placeholder="密码"></el-input>
-                    </el-form-item>
-                    <el-form-item>
-                        <el-button type="primary" class="submit_btn">登陆</el-button>
+                        <el-button type="primary" @click="submitForm('loginForm')" class="submit_btn">登陆</el-button>
                     </el-form-item>
                 </el-form>
                 <p class="tip">温馨提示:</p>
@@ -28,11 +28,34 @@
     export default {
         data () {
             return {
-                loginFrom: {
+                loginForm: {
                     userName: '',
                     userPwd: ''
                 },
-                loginShow: true
+                rules: {
+                    userName: [
+                        {required: true, message: '请输入用户名', trigger: 'blur'}
+                    ],
+                    userPwd: [
+                        {required: true, message: '请输入密码', trigger: 'blur'}
+                    ]
+                },
+                showLogin: false
+            }
+        },
+        mounted () {
+            this.showLogin = true;
+        },
+        methods: {
+            submitForm(formName) {
+                this.$refs[formName].validate((valid) =>{
+                    console.log(valid);
+                    if(valid){
+
+                    } else {
+
+                    }
+                })
             }
         }
     }
