@@ -1,7 +1,7 @@
 import fetch from '../config/fetch'
 
 /**
- * 测试接口
+ * 登录
  */
 
-export const test = (data, type) => fetch('/admin/test', data, type);
+export const login = (data) => fetch('/login/login', data, 'POST');

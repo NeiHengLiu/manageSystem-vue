@@ -13,7 +13,7 @@
                         <el-input type="password" v-model="loginForm.userPwd" placeholder="密码"></el-input>
                     </el-form-item>
                     <el-form-item>
-                        <el-button type="primary" @click="submitForm('loginForm')" class="submit_btn">登录</el-button>
+                        <el-button type="primary" class="submit_btn" @click="submitForm('loginForm')" :loading="loading">登录</el-button>
                     </el-form-item>
                 </el-form>
                 <p class="tip">温馨提示:</p>
@@ -25,7 +25,7 @@
 </template>
 
 <script>
-    import { test } from '../api/getData'
+    import { login } from '../api/getData'
     export default {
         data () {
             return {
@@ -41,6 +41,7 @@
                         {required: true, message: '请输入密码', trigger: 'blur'}
                     ]
                 },
+                loading: false,
                 showLogin: false
             }
         },
@@ -48,13 +49,23 @@
             this.showLogin = true;
         },
         methods: {
-            submitForm(formName) {
-                this.$refs[formName].validate((valid) =>{
+            async submitForm(formName) {
+                this.$refs[formName].validate(async (valid) =>{
                     if(valid){
-                        this.$message({
-                            type: 'success',
-                            message: '登录成功'
-                        });
+                        this.loading = true;
+                        const res = await login({userName: this.loginForm.userName, userPwd: this.loginForm.userPwd});
+                        if(res.data){
+                            this.$message({
+                                type: 'success',
+                                message: '登录成功'
+                            });
+                        } else {
+                            this.$message({
+                                type: 'error',
+                                message: '账号或密码错误'
+                            });
+                        }
+                        this.loading = false;
                     }
                 })
             }
