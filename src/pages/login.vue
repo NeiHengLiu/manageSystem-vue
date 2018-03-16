@@ -25,6 +25,7 @@
 </template>
 
 <script>
+    import { test } from '../api/getData'
     export default {
         data () {
             return {

@@ -6,7 +6,7 @@ import { baseUrl } from './env'
  */
 
 const service = axios.create({
-    baseUrl: baseUrl,
+    baseURL: baseUrl,
     timeout: 10000
 });
 
@@ -38,16 +38,26 @@ service.interceptors.response.use(response => {
  * 封装请求
  */
 
- export default (url, param) => {
+export default (url, param = {}, type = 'GET') => {
     return new Promise((resolve, reject) => {
-        service.get(url, {
-            params: param
-        })
-        .then(response => {
-            resolve(response.data);
-        })
-        .catch(error => {
-            reject(error);
-        });
+        if(type === 'GET'){
+            service.get(url, {
+                params: param
+            })
+            .then(response => {
+                resolve(response.data);
+            })
+            .catch(error => {
+                reject(error);
+            });
+        } else if(type === 'POST'){
+            service.post(url, param)
+            .then(response => {
+                resolve(response.data);
+            })
+            .catch(error => {
+                reject(error);
+            });
+        }
     });
 }
