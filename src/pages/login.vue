@@ -30,8 +30,8 @@
         data () {
             return {
                 loginForm: {
-                    userName: '',
-                    userPwd: ''
+                    userName: 'xiaobai',
+                    userPwd: '123456'
                 },
                 rules: {
                     userName: [
@@ -59,6 +59,7 @@
                                 type: 'success',
                                 message: '登录成功'
                             });
+                            this.$router.push('/manage');
                         } else {
                             this.$message({
                                 type: 'error',
