@@ -11,3 +11,9 @@ export const login = (data) => fetch('/login/login', data, 'POST');
 */
 
 export const logout = () => fetch('/login/logout');
+
+/**
+ * 首页统计数据
+*/
+
+export const statistical = () => fetch('/home/statistical');

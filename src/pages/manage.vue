@@ -4,10 +4,10 @@
             <el-col class="h_100 bg_324057" :span="4" style="overflow-x: hidden;">
                 <el-menu class="el-menu_nav"
                          :default-active="defaultActive"
-                         unique-opened
-                         text-color="#bfcbd9"
-                         active-text-color="#20a0ff"
-                         router>
+                         :unique-opened = "true"
+                         :text-color="'#bfcbd9'"
+                         :active-text-color="'#20a0ff'"
+                         :router="true">
                     <el-menu-item index="manage">
                         <i class="el-icon-menu"></i>
                         <span slot="title">首页</span>

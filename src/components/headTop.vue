@@ -17,11 +17,6 @@
 <script>
     import { logout } from '../api/getData'
     export default {
-        data () {
-            return {
-                
-            }
-        },
         methods: {
             async dropdownHandle (value) {
                 if(value === 'manage'){
