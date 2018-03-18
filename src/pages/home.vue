@@ -54,11 +54,13 @@
 				</el-col>
 			</el-row>
 		</section>
+		<stat-chart></stat-chart>
 	</div>
 </template>
 
 <script>
 	import headTop from '../components/headTop'
+	import statChart from '../components/statisticalChart'
 	import { statistical } from '../api/getData'
 	export default {
 		data () {
@@ -72,7 +74,8 @@
 			}
 		},
 		components: {
-			headTop
+			headTop,
+			statChart
 		},
 		mounted () {
 			this.initData();
