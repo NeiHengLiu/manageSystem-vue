@@ -21,12 +21,13 @@
         methods: {
             initData () {
                 const option = {
+                    color: ['#5793f3', '#675bba', '#d14a61'],
                     title: {
                         text: '走势图'
                     },
                     tooltip: {},
                     legend: {
-                        data:['销量']
+                        data:['销量','库存']
                     },
                     xAxis: {
                         data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
@@ -37,6 +38,11 @@
                             name: '销量',
                             type: 'line',
                             data: [5, 20, 36, 10, 10, 20]
+                        },
+                        {
+                            name: '库存',
+                            type: 'line',
+                            data: [50, 10, 58, 40, 20, 34]
                         }
                     ]
                 };
