@@ -13,6 +13,7 @@
     "axios": "^0.18.0",
     "echarts": "^4.0.4",
     "element-ui": "^2.2.1",
+    "time-formater": "^1.0.1",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1"
   },

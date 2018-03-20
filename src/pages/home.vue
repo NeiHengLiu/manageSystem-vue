@@ -54,13 +54,14 @@
 				</el-col>
 			</el-row>
 		</section>
-		<stat-chart></stat-chart>
+		<stat-chart :xLabelName="xLabelName" :dataSet="dataSet"></stat-chart>
 	</div>
 </template>
 
 <script>
 	import headTop from '../components/headTop'
 	import statChart from '../components/statisticalChart'
+	import timeFormater from 'time-formater'
 	import { statistical } from '../api/getData'
 	export default {
 		data () {
@@ -70,7 +71,9 @@
 				newAdmin: null,
 				totalUser: null,
 				totalOrder: null,
-				totalAdmin: null
+				totalAdmin: null,
+				xLabelName: [],
+				dataSet: []
 			}
 		},
 		components: {
@@ -79,17 +82,23 @@
 		},
 		mounted () {
 			this.initData();
+			for(let i = 6; i > -1; i--) {
+				let date = timeFormater(new Date().getTime() - 86400000*i).format('YYYY-MM-DD');
+				this.xLabelName.push(date);
+			}
+			console.log(this.xLabelName);
 		},
 		methods: {
 			async initData () {
 				let res = await statistical();
 				if(res.state === 'true'){
-					this.newUsers = res.data.newUsers;
-					this.newOrders = res.data.newOrders;
-					this.newAdmin = res.data.newAdmin;
-					this.totalUser = res.data.totalUser;
-					this.totalOrder = res.data.totalOrder;
-					this.totalAdmin = res.data.totalAdmin;
+					this.newUsers = res.dailyData[0][6];
+					this.newOrders = res.dailyData[1][6];
+					this.newAdmin = res.dailyData[2][6];
+					this.totalUser = res.aggregateData.totalUser;
+					this.totalOrder = res.aggregateData.totalOrder;
+					this.totalAdmin = res.aggregateData.totalAdmin;
+					this.dataSet = res.dailyData;
 				}
 			}
 		}

@@ -20,7 +20,7 @@
             this.myChart = echarts.init(document.getElementById('statistical_chart'));
             this.initData();
         },
-        props: ['name', 'dataSet'],
+        props: ['xLabelName', 'dataSet'],
         methods: {
             initData () {
                 const option = {
@@ -53,7 +53,7 @@
                     xAxis: {
                         type: 'category',
                         boundaryGap: false,
-                        data: ["2018-03-14","2018-03-15","2018-03-16","2018-03-17","2018-03-18","2018-03-19", "2018-03-20"]
+                        data: []
                     },
                     yAxis: {
                         type: 'value'
@@ -62,21 +62,41 @@
                         {
                             name: '新增用户',
                             type: 'line',
-                            data: [5, 20, 36, 10, 10, 20, 16]
+                            data: []
                         },
                         {
                             name: '新增订单',
                             type: 'line',
-                            data: [50, 10, 58, 40, 20, 34, 21]
+                            data: []
                         },
                         {
                             name: '新增管理员',
                             type: 'line',
-                            data: [40, 30, 16, 24, 31, 29, 43]
+                            data: []
                         }
                     ]
                 };
                 this.myChart.setOption(option);
+            }
+        },
+        watch: {
+            xLabelName () {
+                // this.initData();
+                this.myChart.setOption({
+                    xAxis: {
+                        data: this.xLabelName
+                    }
+                });
+            },
+            dataSet () {
+                // this.initData();
+                this.myChart.setOption({
+                    series: [
+                        { data: this.dataSet[0] },
+                        { data: this.dataSet[1] },
+                        { data: this.dataSet[2] }
+                    ]
+                });
             }
         }
     }
