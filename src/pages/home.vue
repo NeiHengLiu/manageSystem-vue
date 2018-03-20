@@ -86,7 +86,6 @@
 				let date = timeFormater(new Date().getTime() - 86400000*i).format('YYYY-MM-DD');
 				this.xLabelName.push(date);
 			}
-			console.log(this.xLabelName);
 		},
 		methods: {
 			async initData () {

@@ -81,7 +81,6 @@
         },
         watch: {
             xLabelName () {
-                // this.initData();
                 this.myChart.setOption({
                     xAxis: {
                         data: this.xLabelName
@@ -89,7 +88,6 @@
                 });
             },
             dataSet () {
-                // this.initData();
                 this.myChart.setOption({
                     series: [
                         { data: this.dataSet[0] },
