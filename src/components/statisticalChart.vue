@@ -1,6 +1,6 @@
 <template>
     <div class="statistical_chart">
-        <div id="statistical_chart" style="width:100%;height: 450px;"></div>
+        <div id="statistical_chart"></div>
     </div>
 </template>
 
@@ -13,11 +13,14 @@
     // 引入提示框和标题组件
     import 'echarts/lib/component/tooltip'
     import 'echarts/lib/component/title'
+    import 'echarts/lib/component/toolbox'
+    import 'echarts/lib/component/legend';
     export default {
         mounted () {
             this.myChart = echarts.init(document.getElementById('statistical_chart'));
             this.initData();
         },
+        props: ['name', 'dataSet'],
         methods: {
             initData () {
                 const option = {
@@ -25,28 +28,54 @@
                     title: {
                         text: '走势图'
                     },
-                    tooltip: {},
+                    tooltip: {
+                        trigger: 'axis'
+                    },
                     legend: {
-                        data:['销量','库存']
+                        data:['新增用户', '新增订单', '新增管理员']
+                    },
+                    toolbox: {
+                        show: true,
+                        feature: {
+                            dataZoom: {
+                                yAxisIndex: 'none'
+                            },
+                            dataView: {
+                                readOnly: false
+                            },
+                            magicType: {
+                                type: ['bar', 'line']
+                            },
+                            restore: {},
+                            saveAsImage: {}
+                        }
                     },
                     xAxis: {
-                        data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
+                        type: 'category',
+                        boundaryGap: false,
+                        data: ["2018-03-14","2018-03-15","2018-03-16","2018-03-17","2018-03-18","2018-03-19", "2018-03-20"]
                     },
-                    yAxis: {},
+                    yAxis: {
+                        type: 'value'
+                    },
                     series: [
                         {
-                            name: '销量',
+                            name: '新增用户',
                             type: 'line',
-                            data: [5, 20, 36, 10, 10, 20]
+                            data: [5, 20, 36, 10, 10, 20, 16]
                         },
                         {
-                            name: '库存',
+                            name: '新增订单',
                             type: 'line',
-                            data: [50, 10, 58, 40, 20, 34]
+                            data: [50, 10, 58, 40, 20, 34, 21]
+                        },
+                        {
+                            name: '新增管理员',
+                            type: 'line',
+                            data: [40, 30, 16, 24, 31, 29, 43]
                         }
                     ]
                 };
-
                 this.myChart.setOption(option);
             }
         }
@@ -54,8 +83,14 @@
 </script>
 
 <style>
+    .statistical_chart{
+        width: 100%;
+        padding: 0 50px;
+        box-sizing: border-box;
+    }
     .statistical_chart #statistical_chart{
-        padding: 0px 20px;
+        width:100%;
+        height: 450px;
     }
 </style>
 
