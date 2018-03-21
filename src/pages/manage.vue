@@ -18,46 +18,46 @@
                             <span>数据管理</span>
                         </template>
                         <el-menu-item index="userList">用户列表</el-menu-item>
-                        <el-menu-item>商家列表</el-menu-item>
-                        <el-menu-item>食品列表</el-menu-item>
-                        <el-menu-item>订单列表</el-menu-item>
-                        <el-menu-item>管理员列表</el-menu-item>
+                        <el-menu-item index="businessList">商家列表</el-menu-item>
+                        <el-menu-item index="2_2">食品列表</el-menu-item>
+                        <el-menu-item index="2_3">订单列表</el-menu-item>
+                        <el-menu-item index="2_4">管理员列表</el-menu-item>
                     </el-submenu>
                     <el-submenu index="3">
                         <template slot="title">
                             <i class="el-icon-plus"></i>
                             <span>添加数据</span>
                         </template>
-                        <el-menu-item>添加商铺</el-menu-item>
-                        <el-menu-item>添加商品</el-menu-item>
+                        <el-menu-item index="3_1">添加商铺</el-menu-item>
+                        <el-menu-item index="3_1">添加商品</el-menu-item>
                     </el-submenu>
                     <el-submenu index="4">
                         <template slot="title">
                             <i class="el-icon-star-on"></i>
                             <span>图表</span>
                         </template>
-                        <el-menu-item>用户分布</el-menu-item>
+                        <el-menu-item index="4_1">用户分布</el-menu-item>
                     </el-submenu>
                     <el-submenu index="5">
                         <template slot="title">
                             <i class="el-icon-edit"></i>
                             <span>编辑</span>
                         </template>
-                        <el-menu-item>文本编辑</el-menu-item>
+                        <el-menu-item index="5_1">文本编辑</el-menu-item>
                     </el-submenu>
                     <el-submenu index="6">
                         <template slot="title">
                             <i class="el-icon-setting"></i>
                             <span>设置</span>
                         </template>
-                        <el-menu-item>管理员设置</el-menu-item>
+                        <el-menu-item index="6_1">管理员设置</el-menu-item>
                     </el-submenu>
                     <el-submenu index="7">
                         <template slot="title">
                             <i class="el-icon-warning"></i>
                             <span>说明</span>
                         </template>
-                        <el-menu-item>说明</el-menu-item>
+                        <el-menu-item index="7_1">说明</el-menu-item>
                     </el-submenu>
                 </el-menu>
             </el-col>

@@ -1,16 +1,16 @@
 <template>
 	<div class="user_list">
 		<head-top></head-top>
-		<div class="user_center">
-			<div class="user_table">
-				<el-table :data="tableData" header-row-class-name="user_list_table_head" style="width:100%;border:1px solid #ebeef5;">
+		<div class="baseList_table_conter">
+			<div class="baseList_table_border">
+				<el-table :data="tableData" header-row-class-name="baseList_table_head">
 					<el-table-column type="index" :index="indexMethod" width="100"></el-table-column>
 					<el-table-column prop="date" label="注册日期" width="200"></el-table-column>
 					<el-table-column prop="name" label="用户姓名" width="200"></el-table-column>
 					<el-table-column prop="address" label="注册地址"></el-table-column>
 				</el-table>
 			</div>
-			<div class="page_number">
+			<div class="baseList_table_page_number">
 				<el-pagination
 					@current-change="changePage"
 					layout="total,prev,pager,next"
@@ -55,24 +55,5 @@
 </script>
 
 <style>
-	.user_list .user_center{
-		width: 100%;
-		padding: 20px 20px;
-		box-sizing: border-box;
-	}
-
-	.user_list .user_table{
-		width: 100%;
-	}
-
-	.user_list .page_number{
-		width: 100%;
-		margin-top: 15px;
-	}
-
-	.user_list .user_list_table_head th{
-		background-color: #eef1f6;
-		color: #1f2d3d;
-	}
 </style>
 

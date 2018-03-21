@@ -63,3 +63,25 @@ html,body{
 .bg_324057{
     background-color: #324057;
 }
+
+/** 公共表格样式 **/
+.baseList_table_conter{
+    width: 100%;
+    padding: 20px 20px;
+    box-sizing: border-box;
+}
+
+.baseList_table_border .el-table{
+    width:100%;
+    border:1px solid #ebeef5;
+}
+
+.baseList_table_head th{
+    background-color: #eef1f6;
+    color: #1f2d3d;
+}
+
+.baseList_table_page_number{
+    width: 100%;
+    margin-top: 15px;
+}
