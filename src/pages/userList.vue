@@ -15,7 +15,7 @@
 					@current-change="changePage"
 					layout="total,prev,pager,next"
 					:page-size="lineNumber"
-					:total="1000">
+					:total="totalData">
 				</el-pagination>
 			</div>
 		</div>
@@ -45,6 +45,7 @@
 					}
 				],
 				lineNumber: 20,		// 每页显示多少行
+				totalData: 7512,	// 总数据多少条
 			}
 		},
 		methods: {
