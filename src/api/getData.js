@@ -17,3 +17,9 @@ export const logout = () => fetch('/login/logout');
 */
 
 export const statistical = () => fetch('/home/statistical');
+
+/**
+ * 用户列表
+ */
+
+ export const userList = (data) => fetch('/dataManage/userList', data);

@@ -24,36 +24,28 @@
 
 <script>
 	import headTop from '../components/headTop'
+	import { userList } from '../api/getData'
 	export default {
 		data () {
 			return {
-				tableData: [
-					{
-						date: '2018-03-21',
-						name: '小白',
-						address: '重庆市渝中区较场口日月光广场R1栋'
-					},
-					{
-						date: '2018-03-21',
-						name: '小白',
-						address: '重庆市渝中区较场口日月光广场R1栋'
-					},
-					{
-						date: '2018-03-21',
-						name: '小白',
-						address: '重庆市渝中区较场口日月光广场R1栋'
-					}
-				],
+				tableData: [],
 				lineNumber: 20,		// 每页显示多少行
-				totalData: 7512,	// 总数据多少条
+				totalData: 5304,	// 总数据多少条
 			}
+		},
+		created () {
+			this.getUserListData();
 		},
 		methods: {
 			indexMethod (index) {
 				return index + 1;
 			},
+			async getUserListData () {
+				let res = await userList({'lineNumber': this.lineNumber});
+				this.tableData = res.data;
+			},
 			changePage (val) {
-				console.log(`当前页：${val}页`);
+				this.getUserListData();
 			}
 		},
 		components: {
