@@ -85,3 +85,14 @@ html,body{
     width: 100%;
     margin-top: 15px;
 }
+
+.baseList_table_expand .el-form-item{
+    margin-right: 0px;
+    margin-bottom: 0px;
+    width: 49.5%;
+}
+
+.baseList_table_expand .el-form-item .el-form-item__label{
+    width: 90px;
+    color: #99a9bf;
+}

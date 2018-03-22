@@ -13,7 +13,7 @@
 			<div class="baseList_table_page_number">
 				<el-pagination
 					@current-change="changePage"
-					layout="total,prev,pager,next"
+					layout="total, prev, pager, next"
 					:page-size="lineNumber"
 					:total="totalData">
 				</el-pagination>
