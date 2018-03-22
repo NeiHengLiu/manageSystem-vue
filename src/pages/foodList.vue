@@ -42,8 +42,8 @@
                     <el-table-column label="评分" prop="foodScore"></el-table-column>
                     <el-table-column label="操作">
                         <template slot-scope="scope">
-                            <el-button>编辑</el-button>
-                            <el-button>删除</el-button>
+                            <el-button type="primary" size="mini">编辑</el-button>
+                            <el-button type="danger" size="mini">删除</el-button>
                         </template>
                     </el-table-column>
                 </el-table>
