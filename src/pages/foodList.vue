@@ -79,6 +79,7 @@
                          action="https://jsonplaceholder.typicode.com/posts/"
                          list-type="picture-card"
                          :limit="4"
+                         :multiple="true"
                          :on-exceed="maxImgNum"
                          :on-preview="handlePictureCardPreview"
                          :on-remove="handleRemove">
@@ -86,6 +87,18 @@
                         </el-upload>
                     </el-form-item>
                 </el-form>
+                <!--S 规格列表-->
+                <el-table :data="specData">
+                    <el-table-column label="规格" prop="spec"></el-table-column>
+                    <el-table-column label="包装费" prop="packExpense"></el-table-column>
+                    <el-table-column label="价格" prop="price"></el-table-column>
+                    <el-table-column label="操作">
+                        <template slot-scope="scope">
+                            <el-button type="danger" size="mini">删除</el-button>
+                        </template>
+                    </el-table-column>
+                </el-table>
+                <!--E 规格列表-->
             </el-dialog>
             <!--E 修改食品信息-->
         </div>
@@ -107,7 +120,14 @@
                     name: '',
                     js: '',
                     select: ''
-                }
+                },
+                specData: [
+                    {
+                        spec: '默认',
+                        packExpense: '99',
+                        price: '142'
+                    }
+                ]
             }
         },
         components: {
@@ -129,7 +149,7 @@
                 this.tableData = res.data;
             },
             editRow (row) {   // 编辑一行的内容
-
+                this.outerVisible = true;
             },
             deleteRow (row) {
                 this.$confirm('确认删除《'+row.row.foodName+'》？', '提示', {
@@ -160,7 +180,10 @@
                 console.log(fileList);
             },
             maxImgNum (files, fileList) {   // 文件超出个数限制时
-                console.log('最多只能上传4张图片');
+                this.$message({
+                    showClose: true,
+                    message: '最多只能上传四张图片！'
+                });
                 console.log(files);
                 console.log(fileList);
             }
@@ -169,6 +192,18 @@
 </script>
 
 <style>
-    
+    .food_list .el-upload-list--picture-card .el-upload-list__item,
+    .food_list .el-upload--picture-card{
+        width: 100px;
+        height: 100px;
+    }
+    .food_list .el-upload--picture-card{
+        line-height: 100px;
+    }
+    .food_list .el-upload-list--picture-card .el-progress,
+    .food_list .el-progress-circle{
+        width: 78px !important;
+        height: 78px !important;
+    }
 </style>
 
