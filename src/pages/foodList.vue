@@ -88,17 +88,28 @@
                     </el-form-item>
                 </el-form>
                 <!--S 规格列表-->
-                <el-table :data="specData">
-                    <el-table-column label="规格" prop="spec"></el-table-column>
-                    <el-table-column label="包装费" prop="packExpense"></el-table-column>
-                    <el-table-column label="价格" prop="price"></el-table-column>
-                    <el-table-column label="操作">
-                        <template slot-scope="scope">
-                            <el-button type="danger" size="mini">删除</el-button>
-                        </template>
-                    </el-table-column>
-                </el-table>
+                <el-row>
+                    <div class="baseList_table_border">
+                        <el-table :data="specData" header-row-class-name="baseList_table_head">
+                            <el-table-column label="规格" prop="spec"></el-table-column>
+                            <el-table-column label="包装费" prop="packExpense"></el-table-column>
+                            <el-table-column label="价格" prop="price"></el-table-column>
+                            <el-table-column label="操作">
+                                <template slot-scope="scope">
+                                    <el-button type="danger" size="mini" @click="deleteScope(scope)">删除</el-button>
+                                </template>
+                            </el-table-column>
+                        </el-table>
+                    </div>
+                    <el-row class="txt_center mrt_20">
+                        <el-button type="primary">添加规格</el-button>
+                    </el-row>
+                </el-row>
                 <!--E 规格列表-->
+                <div slot="footer" class="dialog-footer">
+                    <el-button @click="outerVisible = false">取消</el-button>
+                    <el-button type="primary">确定</el-button>
+                </div>
             </el-dialog>
             <!--E 修改食品信息-->
         </div>
@@ -116,12 +127,23 @@
                 totalData: 219,	// 总数据多少条
                 outerVisible: true,     // 外层对话框
                 innerVisible: true,     // 内层对话框
+                showAddPic: true,       // 显示添加图片按钮
                 outerForm: {
                     name: '',
                     js: '',
                     select: ''
                 },
                 specData: [
+                    {
+                        spec: '默认',
+                        packExpense: '99',
+                        price: '142'
+                    },
+                    {
+                        spec: '默认',
+                        packExpense: '99',
+                        price: '142'
+                    },
                     {
                         spec: '默认',
                         packExpense: '99',
@@ -186,6 +208,10 @@
                 });
                 console.log(files);
                 console.log(fileList);
+            },
+            deleteScope (row) {     // 删除规格列表项
+                var index = row.$index;
+                this.specData.splice(index, 1);
             }
         }
     }

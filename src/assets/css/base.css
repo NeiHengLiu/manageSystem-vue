@@ -45,6 +45,10 @@ html,body{
     width: 100%;
 }
 
+.txt_center{
+    text-align: center;
+}
+
 /*公共宽高*/
 .wah_100{
     width: 100%;
@@ -62,6 +66,11 @@ html,body{
 /*公共背景色*/
 .bg_324057{
     background-color: #324057;
+}
+
+/** 公共边距 **/
+.mrt_20{
+    margin-top: 20px;
 }
 
 /** 公共表格样式 **/
