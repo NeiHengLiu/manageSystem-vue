@@ -2,6 +2,7 @@
     <div class="food_list">
         <head-top></head-top>
         <div class="baseList_table_conter">
+            <!--S 食品列表-->
             <div class="baseList_table_border">
                 <el-table :data="tableData" @expand-change="changeRow" header-row-class-name="baseList_table_head">
                     <el-table-column type="expand">
@@ -56,6 +57,37 @@
                     :total="totalData">
                 </el-pagination>
             </div>
+            <!--E 食品列表-->
+
+            <!--S 修改食品信息-->
+            <el-dialog title="修改食品信息" :visible.sync="outerVisible">
+                <el-form :model="outerForm" label-width="100px">
+                    <el-form-item label="食品名称">
+                        <el-input v-model="outerForm.name"></el-input>
+                    </el-form-item>
+                    <el-form-item label="食品介绍">
+                        <el-input v-model="outerForm.js"></el-input>
+                    </el-form-item>
+                    <el-form-item label="食品分类">
+                        <el-select v-model="outerForm.select" placeholder="请选择食品分类">
+                            <el-option label="热销榜" value="sxb"></el-option>
+                            <el-option label="水果" value="sg"></el-option>
+                        </el-select>
+                    </el-form-item>
+                    <el-form-item label="食品图片">
+                        <el-upload
+                         action="https://jsonplaceholder.typicode.com/posts/"
+                         list-type="picture-card"
+                         :limit="4"
+                         :on-exceed="maxImgNum"
+                         :on-preview="handlePictureCardPreview"
+                         :on-remove="handleRemove">
+                            <i class="el-icon-plus"></i>
+                        </el-upload>
+                    </el-form-item>
+                </el-form>
+            </el-dialog>
+            <!--E 修改食品信息-->
         </div>
     </div>
 </template>
@@ -68,8 +100,18 @@
             return {
                 tableData: [],
 				lineNumber: 20,		// 每页显示多少行
-				totalData: 219,	// 总数据多少条
+                totalData: 219,	// 总数据多少条
+                outerVisible: true,     // 外层对话框
+                innerVisible: true,     // 内层对话框
+                outerForm: {
+                    name: '',
+                    js: '',
+                    select: ''
+                }
             }
+        },
+        components: {
+            headTop
         },
         mounted () {
             this.getFoodList();
@@ -90,7 +132,7 @@
 
             },
             deleteRow (row) {
-                this.$confirm('确认删除这条数据吗？', '提示', {
+                this.$confirm('确认删除《'+row.row.foodName+'》？', '提示', {
                     confirmButtonText: '确定',
                     cancelButtonText: '取消',
                     type: 'warning'
@@ -107,12 +149,21 @@
                     }
                 })
                 .catch(() => {
-
+                    
                 });
+            },
+            handlePictureCardPreview (file) {   // 点击已上传的文件链接时的钩子, 可以通过 file.response 拿到服务端返回数据
+                console.log(file.response);
+            },
+            handleRemove (file, fileList) {   // 文件列表移除文件时的钩子
+                console.log(file);
+                console.log(fileList);
+            },
+            maxImgNum (files, fileList) {   // 文件超出个数限制时
+                console.log('最多只能上传4张图片');
+                console.log(files);
+                console.log(fileList);
             }
-        },
-        components: {
-            headTop
         }
     }
 </script>
