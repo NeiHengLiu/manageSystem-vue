@@ -23,3 +23,15 @@ export const statistical = () => fetch('/home/statistical');
  */
 
  export const userList = (data) => fetch('/dataManage/userList', data);
+
+ /**
+  * 食品列表
+  */
+
+export const foodList = () => fetch('/dataManage/foodList');
+
+/**
+ * 删除食品
+ */
+
+export const deleteFood = (data) => fetch('/dataManage/deleteFood', data);

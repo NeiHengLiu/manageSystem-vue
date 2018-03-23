@@ -42,8 +42,8 @@
                     <el-table-column label="评分" prop="foodScore"></el-table-column>
                     <el-table-column label="操作">
                         <template slot-scope="scope">
-                            <el-button type="primary" size="mini">编辑</el-button>
-                            <el-button type="danger" size="mini">删除</el-button>
+                            <el-button type="primary" @click="editRow(scope)" size="mini">编辑</el-button>
+                            <el-button type="danger" @click="deleteRow(scope)" size="mini">删除</el-button>
                         </template>
                     </el-table-column>
                 </el-table>
@@ -62,44 +62,53 @@
 
 <script>
     import headTop from '../components/headTop'
+    import { foodList, deleteFood } from '../api/getData'
     export default {
         data () {
             return {
-                tableData: [
-                    {
-                        foodName: '12987122',
-                        restaurantName: '好滋好味鸡蛋仔',
-                        foodId: '431',
-                        restaurantId: '12',
-                        foodIntroduce: '上海市普陀区真北路',
-                        restaurantAddress: '王小虎夫妻店',
-                        foodScore: '4.5',
-                        foodClassify: '小吃类',
-                        monthlySales: '239'
-                    },
-                    {
-                        foodName: '458',
-                        restaurantName: 'asdf',
-                        foodId: '651',
-                        restaurantId: '5',
-                        foodIntroduce: 'qmnfvs,mg',
-                        restaurantAddress: 'jivew',
-                        foodScore: '4.9',
-                        foodClassify: '想吃类',
-                        monthlySales: '435'
-                    }
-                ],
+                tableData: [],
 				lineNumber: 20,		// 每页显示多少行
 				totalData: 219,	// 总数据多少条
             }
         },
+        mounted () {
+            this.getFoodList();
+        },
         methods: {
-            changePage (val) {
-                console.log(`当前第：${val}页`);
+            changePage (val) {  // 选择页数
+                this.getFoodList();
             },
-            changeRow (row, expandedRows) {
-                console.log(row);
-                console.log(expandedRows);
+            changeRow (row, expandedRows) { // 展开或关闭行
+                //console.log(row);
+                //console.log(expandedRows);
+            },
+            async getFoodList () {  // 获取食品列表数据
+                const res = await foodList();
+                this.tableData = res.data;
+            },
+            editRow (row) {   // 编辑一行的内容
+
+            },
+            deleteRow (row) {
+                this.$confirm('确认删除这条数据吗？', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                })
+                .then(async () => {
+                    let foodId = row.row.foodId;
+                    let res = await deleteFood({foodId: foodId});
+                    if(res.state === true){
+                        this.tableData.splice(row.$index, 1);
+                        this.$message({
+                            type: 'success',
+                            message: '删除成功！'
+                        });
+                    }
+                })
+                .catch(() => {
+
+                });
             }
         },
         components: {
