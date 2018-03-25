@@ -66,7 +66,7 @@
                         <el-input v-model="outerForm.name"></el-input>
                     </el-form-item>
                     <el-form-item label="食品介绍">
-                        <el-input v-model="outerForm.js"></el-input>
+                        <el-input v-model="outerForm.introduce"></el-input>
                     </el-form-item>
                     <el-form-item label="食品分类">
                         <el-select v-model="outerForm.select" placeholder="请选择食品分类">
@@ -102,12 +102,36 @@
                         </el-table>
                     </div>
                     <el-row class="txt_center mrt_20">
-                        <el-button type="primary">添加规格</el-button>
+                        <el-button type="primary" @click="innerVisible=true">添加规格</el-button>
                     </el-row>
                 </el-row>
                 <!--E 规格列表-->
+
+                <!--S 添加规格-->
+                <el-dialog
+                    title="添加规格"
+                    :visible.sync="innerVisible"
+                    append-to-body>
+                    <el-form ref="addSpecForm" :model="addSpecForm" label-width="100px">
+                        <el-form-item label="规格">
+                            <el-input v-model="addSpecForm.specName"></el-input>
+                        </el-form-item>
+                        <el-form-item label="包装费">
+                            <el-input-number v-model="addSpecForm.pack" :min="0"></el-input-number>
+                        </el-form-item>
+                        <el-form-item label="价格">
+                            <el-input-number v-model="addSpecForm.price" :min="0"></el-input-number>
+                        </el-form-item>
+                    </el-form>
+                    <div slot="footer" class="dialog-footer">
+                        <el-button @click="innerVisible=false">取消</el-button>
+                        <el-button type="primary">确定</el-button>
+                    </div>
+                </el-dialog>
+                <!--E 添加规格-->
+
                 <div slot="footer" class="dialog-footer">
-                    <el-button @click="outerVisible = false">取消</el-button>
+                    <el-button @click="outerVisible=false">取消</el-button>
                     <el-button type="primary">确定</el-button>
                 </div>
             </el-dialog>
@@ -130,7 +154,7 @@
                 showAddPic: true,       // 显示添加图片按钮
                 outerForm: {
                     name: '',
-                    js: '',
+                    introduce: '',
                     select: ''
                 },
                 specData: [
@@ -149,7 +173,12 @@
                         packExpense: '99',
                         price: '142'
                     }
-                ]
+                ],
+                addSpecForm: {
+                    specName: '',
+                    pack: 0,
+                    price: 0
+                }
             }
         },
         components: {
