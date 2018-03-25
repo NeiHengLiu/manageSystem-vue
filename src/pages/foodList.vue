@@ -69,9 +69,8 @@
                         <el-input v-model="outerForm.introduce"></el-input>
                     </el-form-item>
                     <el-form-item label="食品分类">
-                        <el-select v-model="outerForm.select" placeholder="请选择食品分类">
-                            <el-option label="热销榜" value="sxb"></el-option>
-                            <el-option label="水果" value="sg"></el-option>
+                        <el-select v-model="outerForm.selectVal" placeholder="请选择食品分类">
+                            <el-option :key="item.value" :label="item.label" :value="item.value" v-for="item in foodClassify"></el-option>
                         </el-select>
                     </el-form-item>
                     <el-form-item label="食品图片">
@@ -155,7 +154,7 @@
                 outerForm: {
                     name: '',
                     introduce: '',
-                    select: ''
+                    selectVal: ''
                 },
                 specData: [
                     {
@@ -179,6 +178,8 @@
                     pack: 0,
                     price: 0
                 },
+                foodClassify: [],
+                currClassifyVal: '',
                 rules: {
                     specName: [
                         {required: true, message: '请输入规格名称', trigger: 'blur'}
@@ -203,6 +204,7 @@
             async getFoodList () {  // 获取食品列表数据
                 const res = await foodList();
                 this.tableData = res.data;
+                this.foodClassify = res.classify;
             },
             editRow (row) {   // 编辑一行的内容
                 this.outerVisible = true;
