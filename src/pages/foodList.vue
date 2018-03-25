@@ -112,8 +112,8 @@
                     title="添加规格"
                     :visible.sync="innerVisible"
                     append-to-body>
-                    <el-form ref="addSpecForm" :model="addSpecForm" label-width="100px">
-                        <el-form-item label="规格">
+                    <el-form ref="addSpecForm" :model="addSpecForm" :rules="rules" label-width="100px">
+                        <el-form-item label="规格" prop="specName">
                             <el-input v-model="addSpecForm.specName"></el-input>
                         </el-form-item>
                         <el-form-item label="包装费">
@@ -178,6 +178,11 @@
                     specName: '',
                     pack: 0,
                     price: 0
+                },
+                rules: {
+                    specName: [
+                        {required: true, message: '请输入规格名称', trigger: 'blur'}
+                    ]
                 }
             }
         },
