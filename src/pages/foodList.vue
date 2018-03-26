@@ -60,7 +60,7 @@
             <!--E 食品列表-->
 
             <!--S 修改食品信息-->
-            <el-dialog title="修改食品信息" :visible.sync="outerVisible">
+            <el-dialog title="修改食品信息" :show-close="false" :visible.sync="outerVisible">
                 <el-form :model="outerForm" label-width="100px">
                     <el-form-item label="食品名称">
                         <el-input v-model="outerForm.name"></el-input>
@@ -109,8 +109,9 @@
                 <!--S 添加规格-->
                 <el-dialog
                     title="添加规格"
+                    :show-close="false"
                     :visible.sync="innerVisible"
-                    append-to-body>
+                    :append-to-body="true">
                     <el-form ref="addSpecForm" :model="addSpecForm" :rules="rules" label-width="100px">
                         <el-form-item label="规格" prop="specName">
                             <el-input v-model="addSpecForm.specName"></el-input>
@@ -123,7 +124,7 @@
                         </el-form-item>
                     </el-form>
                     <div slot="footer" class="dialog-footer">
-                        <el-button @click="emptySpec">取消</el-button>
+                        <el-button @click="emptySpec('addSpecForm')">取消</el-button>
                         <el-button type="primary" @click="addSpec('addSpecForm')">确定</el-button>
                     </div>
                 </el-dialog>
@@ -148,12 +149,12 @@
                 tableData: [],
 				lineNumber: 20,		// 每页显示多少行
                 totalData: 219,	// 总数据多少条
-                outerVisible: true,     // 外层对话框
+                outerVisible: false,     // 外层对话框
                 innerVisible: false,     // 内层对话框
                 outerForm: {
                     name: '',
                     introduce: '',
-                    selectVal: '单点'
+                    selectVal: ''
                 },
                 specData: [],
                 addSpecForm: {
@@ -194,10 +195,11 @@
                 this.foodClassify = res.data;
             },
             editRow (row) {   // 编辑一行的内容
+
                 this.outerVisible = true;
             },
             deleteRow (row) {
-                this.$confirm('确认删除《'+row.row.foodName+'》？', '提示', {
+                this.$confirm('确认删除《'+row.row.foodName+'》？', '删除提示', {
                     confirmButtonText: '确定',
                     cancelButtonText: '取消',
                     type: 'warning'
@@ -234,18 +236,18 @@
                 var index = row.$index;
                 this.specData.splice(index, 1);
             },
-            addSpec (formName) {
+            addSpec (formName) {    // 添加规格
                 this.$refs[formName].validate((valid) => {
                     if(valid){
                         this.specData.push({...this.addSpecForm});
-                        this.emptySpec();
+                        this.emptySpec(formName);
                     }
                 });
             },
-            emptySpec () {
-                this.addSpecForm.specName = '';
+            emptySpec (formName) {  // 清空规格表单
                 this.addSpecForm.pack = 0;
                 this.addSpecForm.price = 0;
+                this.$refs[formName].resetFields();
                 this.innerVisible = false;
             }
         }
