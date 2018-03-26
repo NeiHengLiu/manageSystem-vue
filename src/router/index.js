@@ -7,8 +7,9 @@ const login = r => require.ensure([], () => r(require('../pages/login')), 'login
 const manage = r => require.ensure([], () => r(require('../pages/manage')), 'manage');
 const home = r => require.ensure([], () => r(require('../pages/home')), 'home');
 const userList = r => require.ensure([], () => r(require('../pages/userList')), 'userList');
-const businessList = r => require.ensure([], () => r(require('../pages/businessList')), 'businessList')
-const foodList = r => require.ensure([], () => r(require('../pages/foodList')), 'foodList')
+const businessList = r => require.ensure([], () => r(require('../pages/businessList')), 'businessList');
+const foodList = r => require.ensure([], () => r(require('../pages/foodList')), 'foodList');
+const orderList = r => require.ensure([], () => r(require('../pages/orderList')), 'orderList');
 
 const routes = [
 	{
@@ -38,6 +39,11 @@ const routes = [
 				path: '/foodList',
 				component: foodList,
 				meta: ['数据管理', '食品列表']
+			},
+			{
+				path: '/orderList',
+				component: orderList,
+				meta: ['数据管理', '订单列表']
 			}
 		]
 	}
