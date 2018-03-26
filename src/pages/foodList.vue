@@ -90,8 +90,8 @@
                 <el-row>
                     <div class="baseList_table_border">
                         <el-table :data="specData" header-row-class-name="baseList_table_head">
-                            <el-table-column label="规格" prop="spec"></el-table-column>
-                            <el-table-column label="包装费" prop="packExpense"></el-table-column>
+                            <el-table-column label="规格" prop="specName"></el-table-column>
+                            <el-table-column label="包装费" prop="pack"></el-table-column>
                             <el-table-column label="价格" prop="price"></el-table-column>
                             <el-table-column label="操作">
                                 <template slot-scope="scope">
@@ -123,8 +123,8 @@
                         </el-form-item>
                     </el-form>
                     <div slot="footer" class="dialog-footer">
-                        <el-button @click="innerVisible=false">取消</el-button>
-                        <el-button type="primary">确定</el-button>
+                        <el-button @click="emptySpec">取消</el-button>
+                        <el-button type="primary" @click="addSpec('addSpecForm')">确定</el-button>
                     </div>
                 </el-dialog>
                 <!--E 添加规格-->
@@ -141,7 +141,7 @@
 
 <script>
     import headTop from '../components/headTop'
-    import { foodList, deleteFood } from '../api/getData'
+    import { foodList, foodDelete, foodClassify } from '../api/getData'
     export default {
         data () {
             return {
@@ -149,30 +149,13 @@
 				lineNumber: 20,		// 每页显示多少行
                 totalData: 219,	// 总数据多少条
                 outerVisible: true,     // 外层对话框
-                innerVisible: true,     // 内层对话框
-                showAddPic: true,       // 显示添加图片按钮
+                innerVisible: false,     // 内层对话框
                 outerForm: {
                     name: '',
                     introduce: '',
-                    selectVal: ''
+                    selectVal: '单点'
                 },
-                specData: [
-                    {
-                        spec: '默认',
-                        packExpense: '99',
-                        price: '142'
-                    },
-                    {
-                        spec: '默认',
-                        packExpense: '99',
-                        price: '142'
-                    },
-                    {
-                        spec: '默认',
-                        packExpense: '99',
-                        price: '142'
-                    }
-                ],
+                specData: [],
                 addSpecForm: {
                     specName: '',
                     pack: 0,
@@ -192,6 +175,7 @@
         },
         mounted () {
             this.getFoodList();
+            this.getFoodClassify();
         },
         methods: {
             changePage (val) {  // 选择页数
@@ -204,7 +188,10 @@
             async getFoodList () {  // 获取食品列表数据
                 const res = await foodList();
                 this.tableData = res.data;
-                this.foodClassify = res.classify;
+            },
+            async getFoodClassify () {    // 获取食品分类
+                let res = await foodClassify();
+                this.foodClassify = res.data;
             },
             editRow (row) {   // 编辑一行的内容
                 this.outerVisible = true;
@@ -217,7 +204,7 @@
                 })
                 .then(async () => {
                     let foodId = row.row.foodId;
-                    let res = await deleteFood({foodId: foodId});
+                    let res = await foodDelete({foodId: foodId});
                     if(res.state === true){
                         this.tableData.splice(row.$index, 1);
                         this.$message({
@@ -231,23 +218,35 @@
                 });
             },
             handlePictureCardPreview (file) {   // 点击已上传的文件链接时的钩子, 可以通过 file.response 拿到服务端返回数据
-                console.log(file.response);
+                // console.log(file.response);
             },
             handleRemove (file, fileList) {   // 文件列表移除文件时的钩子
-                console.log(file);
-                console.log(fileList);
+                // console.log(file);
+                // console.log(fileList);
             },
             maxImgNum (files, fileList) {   // 文件超出个数限制时
                 this.$message({
                     showClose: true,
                     message: '最多只能上传四张图片！'
                 });
-                console.log(files);
-                console.log(fileList);
             },
             deleteScope (row) {     // 删除规格列表项
                 var index = row.$index;
                 this.specData.splice(index, 1);
+            },
+            addSpec (formName) {
+                this.$refs[formName].validate((valid) => {
+                    if(valid){
+                        this.specData.push({...this.addSpecForm});
+                        this.emptySpec();
+                    }
+                });
+            },
+            emptySpec () {
+                this.addSpecForm.specName = '';
+                this.addSpecForm.pack = 0;
+                this.addSpecForm.price = 0;
+                this.innerVisible = false;
             }
         }
     }

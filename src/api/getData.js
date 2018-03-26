@@ -34,4 +34,10 @@ export const foodList = () => fetch('/dataManage/foodList');
  * 删除食品
  */
 
-export const deleteFood = (data) => fetch('/dataManage/deleteFood', data);
+export const foodDelete = (data) => fetch('/dataManage/foodDelete', data);
+
+/**
+ * 食品分类
+ */
+
+export const foodClassify = () => fetch('/dataManage/foodClassify');
