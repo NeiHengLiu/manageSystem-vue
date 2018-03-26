@@ -132,7 +132,7 @@
 
                 <div slot="footer" class="dialog-footer">
                     <el-button @click="outerVisible=false">取消</el-button>
-                    <el-button type="primary">确定</el-button>
+                    <el-button type="primary" @click="upData">确定</el-button>
                 </div>
             </el-dialog>
             <!--E 修改食品信息-->
@@ -142,7 +142,7 @@
 
 <script>
     import headTop from '../components/headTop'
-    import { foodList, foodDelete, foodClassify } from '../api/getData'
+    import { foodList, foodDelete, foodClassify, upFood } from '../api/getData'
     export default {
         data () {
             return {
@@ -152,6 +152,7 @@
                 outerVisible: false,     // 外层对话框
                 innerVisible: false,     // 内层对话框
                 outerForm: {
+                    index: '',
                     name: '',
                     introduce: '',
                     selectVal: ''
@@ -195,7 +196,10 @@
                 this.foodClassify = res.data;
             },
             editRow (row) {   // 编辑一行的内容
-
+                this.outerForm.index = row.$index;
+                this.outerForm.name = row.row.foodName;
+                this.outerForm.introduce = row.row.foodIntroduce;
+                this.outerForm.selectVal = row.row.foodClassify;
                 this.outerVisible = true;
             },
             deleteRow (row) {
@@ -213,11 +217,35 @@
                             type: 'success',
                             message: '删除成功！'
                         });
+                    } else {
+                        this.$message({
+                            type: 'error',
+                            message: res.message
+                        });
                     }
                 })
                 .catch(() => {
                     
                 });
+            },
+            async upData () {     // 更新食品信息
+                let obj = this.tableData[this.outerForm.index];
+                let res = await upFood();
+                if(res.state === true){
+                    obj.foodName = this.outerForm.name;
+                    obj.foodIntroduce = this.outerForm.introduce;
+                    obj.foodClassify = this.outerForm.selectVal;
+                    this.outerVisible = false;
+                    this.$message({
+                        type: 'success',
+                        message: '更新食品信息成功！'
+                    });
+                } else {
+                    this.$message({
+                        type: 'error',
+                        message: res.message
+                    });
+                }
             },
             handlePictureCardPreview (file) {   // 点击已上传的文件链接时的钩子, 可以通过 file.response 拿到服务端返回数据
                 // console.log(file.response);

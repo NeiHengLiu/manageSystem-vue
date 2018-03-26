@@ -41,3 +41,9 @@ export const foodDelete = (data) => fetch('/dataManage/foodDelete', data);
  */
 
 export const foodClassify = () => fetch('/dataManage/foodClassify');
+
+/**
+ * 食品更新
+ */
+
+export const upFood = () => fetch('/dataManage/upFood');
