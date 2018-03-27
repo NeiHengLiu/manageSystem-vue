@@ -52,4 +52,4 @@ export const upFood = () => fetch('/dataManage/upFood');
  * 订单列表
 */
 
-export const orderList = () => fetch('/dataManage/orderList');
+export const orderList = (data) => fetch('/dataManage/orderList', data);

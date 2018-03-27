@@ -42,6 +42,14 @@
                     <el-table-column label="订单状态" prop="orrderState"></el-table-column>
                 </el-table>
             </div>
+            <div class="baseList_table_page_number">
+                <el-pagination
+                    @current-change="changePage"
+                    layout="total, prev, pager, next"
+                    :page-size="lineNumber"
+                    :total="totalData">
+                </el-pagination>
+            </div>
             <!--E 订单列表-->
         </div>
     </div>
@@ -63,18 +71,26 @@
                         shipAddress: '重庆市渝北区龙山街道',
                         storeId: '110',
                         storeAddress: '重庆市渝中区日月光中心'
-                    },
-                    {
-                        orrderId: '2125',
-                        totalPrice: 12205,
-                        orrderState: '支付超时',
-                        userName: '小白',
-                        shopName: '小白之家',
-                        shipAddress: '重庆市渝北区龙山街道',
-                        storeId: '110',
-                        storeAddress: '重庆市渝中区日月光中心'
                     }
-                ]
+                ],
+                pageNum: 1,
+                lineNumber: 20,
+                totalData: 3157
+            }
+        },
+        mounted () {
+            this.getOrderList();
+        },
+        methods: {
+            async getOrderList () {
+                let res = await orderList({ pageNum: this.pageNum });
+                if(res.data.length > 0){
+                    this.tableData = res.data;
+                }
+            },
+            changePage (val) {
+                this.pageNum = val;
+                this.getOrderList();
             }
         },
         components: {
