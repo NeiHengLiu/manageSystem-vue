@@ -47,3 +47,9 @@ export const foodClassify = () => fetch('/dataManage/foodClassify');
  */
 
 export const upFood = () => fetch('/dataManage/upFood');
+
+/**
+ * 订单列表
+*/
+
+export const orderList = () => fetch('/dataManage/orderList');
