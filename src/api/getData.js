@@ -59,3 +59,9 @@ export const orderList = (data) => fetch('/dataManage/orderList', data);
  */
 
 export const adminList = () => fetch('/dataManage/adminList');
+
+/**
+ * 添加商铺
+ */
+
+export const addShops = (data) => fetch('/addData/addShops', data, 'POST');
