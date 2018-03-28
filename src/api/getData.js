@@ -53,3 +53,9 @@ export const upFood = () => fetch('/dataManage/upFood');
 */
 
 export const orderList = (data) => fetch('/dataManage/orderList', data);
+
+/**
+ * 管理员列表
+ */
+
+export const adminList = () => fetch('/dataManage/adminList');

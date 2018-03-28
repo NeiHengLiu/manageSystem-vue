@@ -10,6 +10,7 @@ const userList = r => require.ensure([], () => r(require('../pages/userList')), 
 const businessList = r => require.ensure([], () => r(require('../pages/businessList')), 'businessList');
 const foodList = r => require.ensure([], () => r(require('../pages/foodList')), 'foodList');
 const orderList = r => require.ensure([], () => r(require('../pages/orderList')), 'orderList');
+const adminList = r => require.ensure([], () => r(require('../pages/adminList')), 'adminList');
 
 const routes = [
 	{
@@ -44,6 +45,11 @@ const routes = [
 				path: '/orderList',
 				component: orderList,
 				meta: ['数据管理', '订单列表']
+			},
+			{
+				path: '/adminList',
+				component: adminList,
+				meta: ['数据管理', '管理员列表']
 			}
 		]
 	}

@@ -21,7 +21,7 @@
                         <el-menu-item index="businessList">商家列表</el-menu-item>
                         <el-menu-item index="foodList">食品列表</el-menu-item>
                         <el-menu-item index="orderList">订单列表</el-menu-item>
-                        <el-menu-item index="2_4">管理员列表</el-menu-item>
+                        <el-menu-item index="adminList">管理员列表</el-menu-item>
                     </el-submenu>
                     <el-submenu index="3">
                         <template slot="title">
