@@ -73,6 +73,21 @@
                         ></el-option>
                     </el-select>
                 </el-form-item>
+                <el-row class="baseList_table_border">
+                    <el-table :data="addShopsForm.specData" header-row-class-name="baseList_table_head">
+                        <el-table-column label="活动标题" prop="specName"></el-table-column>
+                        <el-table-column label="活动名称" prop="pack"></el-table-column>
+                        <el-table-column label="活动详情" prop="price"></el-table-column>
+                        <el-table-column label="操作">
+                            <template slot-scope="scope">
+                                <el-button type="danger" size="mini" @click="deleteScope(scope)">删除</el-button>
+                            </template>
+                        </el-table-column>
+                    </el-table>
+                </el-row>
+                <el-row class="boxFlexCen mrt_20">
+                    <el-button type="primary" @click="submitForm('addShopsForm')">立即创建</el-button>
+                </el-row>
             </el-form>
         </div>
     </div>
@@ -107,9 +122,9 @@
                             label: '',
                             value: ''
                         }
-                    ]
-                },
-                city: ''
+                    ],
+                    specData: []
+                }
             }
         },
         methods: {
@@ -123,6 +138,9 @@
 
             },
             upSendChange (value) {
+
+            },
+            submitForm (formName) {
 
             }
         },
