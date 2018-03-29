@@ -50,8 +50,7 @@
                         v-model="addShopsForm.timer"
                         range-separator="至"
                         start-placeholder="开始时间"
-                        end-placeholder="结束时间"
-                        :editable="false">
+                        end-placeholder="结束时间">
                     </el-time-picker>
                 </el-form-item>
                 <el-form-item label="店铺头像">
