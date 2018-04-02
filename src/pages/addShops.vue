@@ -62,15 +62,31 @@
                         :show-file-list="false"
                         :on-success="handleAvatarSuccess"
                         :before-upload="beforeAvatarUpload">
-                        <img v-if="addShopsForm.imageUrl" :src="addShopsForm.imageUrl" class="avatar">
+                        <img v-if="imageUrl" :src="imageUrl" class="avatar">
                         <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                     </el-upload>
                 </el-form-item>
                 <el-form-item label="营业执照">
-
+                    <el-upload
+                        class="avatar-uploader"
+                        action="https://jsonplaceholder.typicode.com/posts/"
+                        :show-file-list="false"
+                        :on-success="handleAvatarSuccess"
+                        :before-upload="beforeAvatarUpload">
+                        <img v-if="imageUrl" :src="imageUrl" class="avatar">
+                        <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                    </el-upload>
                 </el-form-item>
                 <el-form-item label="餐饮许可证">
-
+                    <el-upload
+                        class="avatar-uploader"
+                        action="https://jsonplaceholder.typicode.com/posts/"
+                        :show-file-list="false"
+                        :on-success="handleAvatarSuccess"
+                        :before-upload="beforeAvatarUpload">
+                        <img v-if="imageUrl" :src="imageUrl" class="avatar">
+                        <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                    </el-upload>
                 </el-form-item>
                 <el-form-item label="优惠活动">
                     <el-select v-model="addShopsForm.discountsVal" placeholder="请选择优惠活动">
@@ -132,9 +148,9 @@
                             value: ''
                         }
                     ],
-                    imageUrl: '',
                     specData: []
-                }
+                },
+                imageUrl: '',
             }
         },
         methods: {
@@ -154,7 +170,7 @@
 
             },
             handleAvatarSuccess (res, file) {
-                this.addShopsForm.imageUrl = URL.createObjectURL(file.raw);
+                this.imageUrl = URL.createObjectURL(file.raw);
             },
             beforeAvatarUpload (file) {
                 const isJPG = file.type === 'image/jpeg';
