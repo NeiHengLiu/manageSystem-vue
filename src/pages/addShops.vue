@@ -89,9 +89,9 @@
                     </el-upload>
                 </el-form-item>
                 <el-form-item label="优惠活动">
-                    <el-select v-model="addShopsForm.discountsVal" placeholder="请选择优惠活动">
+                    <el-select v-model="discountsVal" @change="activitySelect" placeholder="请选择优惠活动">
                         <el-option
-                            v-for="item in addShopsForm.discounts"
+                            v-for="item in discounts"
                             :key="item.value"
                             :label="item.label"
                             :value="item.value"
@@ -99,13 +99,13 @@
                     </el-select>
                 </el-form-item>
                 <el-row class="baseList_table_border">
-                    <el-table :data="addShopsForm.specData" header-row-class-name="baseList_table_head">
-                        <el-table-column label="活动标题" prop="specName"></el-table-column>
-                        <el-table-column label="活动名称" prop="pack"></el-table-column>
-                        <el-table-column label="活动详情" prop="price"></el-table-column>
+                    <el-table :data="addShopsForm.activityData" header-row-class-name="baseList_table_head">
+                        <el-table-column label="活动标题" prop="activityTitle"></el-table-column>
+                        <el-table-column label="活动名称" prop="activityName"></el-table-column>
+                        <el-table-column label="活动详情" prop="activityInfo"></el-table-column>
                         <el-table-column label="操作">
-                            <template slot-scope="scope">
-                                <el-button type="danger" size="mini" @click="deleteScope(scope)">删除</el-button>
+                            <template slot-scope="activity">
+                                <el-button type="danger" size="mini" @click="deleteActivity(activity)">删除</el-button>
                             </template>
                         </el-table-column>
                     </el-table>
@@ -115,6 +115,21 @@
                 </el-row>
             </el-form>
         </div>
+
+        <!--S 添加优惠活动-->
+        <el-dialog
+            title="添加优惠信息"
+            width="500px"
+            :visible.sync="dialogVisible"
+            :show-close="false">
+            <div class="mrb_20">请输入活动详情</div>
+            <el-input v-model="activityInfo" :autofocus="true"></el-input>
+            <div slot="footer" class="dialog-footer">
+                <el-button @click="dialogVisible=false">取消</el-button>
+                <el-button type="primary" @click="addActivity">确定</el-button>
+            </div>
+        </el-dialog>
+        <!--E 添加优惠活动-->
     </div>
 </template>
 
@@ -131,26 +146,41 @@
                     introduce: '',
                     slogan: '',
                     classifySelectVal: '',
-                    classify: [
-                        {
-                            label: '',
-                            value: ''
-                        }
-                    ],
+                    classify: [],
                     characteristic: [],
                     shippingFee: 0,
                     upSend: 0,
                     timer: [new Date(2016, 9, 10, 8, 40), new Date(2016, 9, 10, 9, 40)],
-                    discountsVal: '',
-                    discounts: [
+                    activityData: [
                         {
-                            label: '',
-                            value: ''
+                            activityTitle: '减',
+                            activityName: '满减优惠',
+                            activityInfo: '满30减5，满60减8'
                         }
-                    ],
-                    specData: []
+                    ]
                 },
+                discountsVal: '',
+                discounts: [
+                    {
+                        value: '满减优惠',
+                        label: '满减优惠'
+                    }, 
+                    {
+                        value: '优惠大酬宾',
+                        label: '优惠大酬宾'
+                    }, 
+                    {
+                        value: '新用户立减',
+                        label: '新用户立减'
+                    }, 
+                    {
+                        value: '进店领券',
+                        label: '进店领券'
+                    }
+                ],
                 imageUrl: '',
+                activityInfo: '',
+                dialogVisible: false
             }
         },
         methods: {
@@ -187,6 +217,15 @@
                     });
                 }
                 return isJPG && isLt2M;
+            },
+            activitySelect (val) {
+                this.dialogVisible = true;
+            },
+            addActivity () {
+
+            },
+            deleteActivity (res) {
+                this.addShopsForm.activityData.splice(res.$index, 1);
             }
         },
         components: {

@@ -191,6 +191,10 @@ html,body{
     margin-top: 20px;
 }
 
+.mrb_20{
+    margin-bottom: 20px;
+}
+
 /** 公共表格样式 **/
 .baseList_table_conter{
     width: 100%;
