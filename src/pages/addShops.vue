@@ -2,15 +2,15 @@
     <div class="add_shops">
         <head-top></head-top>
         <div class="baseList_table_conter">
-            <el-form ref="addShopsForm" :model="addShopsForm" label-width="100px">
-                <el-form-item label="店铺名称">
+            <el-form ref="addShopsForm" :rules="rules" :model="addShopsForm" label-width="100px">
+                <el-form-item label="店铺名称" prop="shopName">
                     <el-input v-model="addShopsForm.shopName" placeholder="请输入店铺名称"></el-input>
                 </el-form-item>
-                <el-form-item label="详细地址">
+                <el-form-item label="详细地址" prop="address">
                     <el-input v-model="addShopsForm.address" placeholder="请输入地址"></el-input>
                 </el-form-item>
-                <el-form-item label="联系电话">
-                    <el-input v-model="addShopsForm.tel" placeholder="请输入电话"></el-input>
+                <el-form-item label="联系电话" prop="tel">
+                    <el-input v-model.number="addShopsForm.tel" maxlength="11" placeholder="请输入电话"></el-input>
                 </el-form-item>
                 <el-form-item label="店铺简介">
                     <el-input v-model="addShopsForm.introduce" placeholder="请输入店铺简介"></el-input>
@@ -180,7 +180,19 @@
                 ],
                 imageUrl: '',
                 activityInfo: '',
-                dialogVisible: false
+                dialogVisible: false,
+                rules: {
+                    shopName: [
+                        {required: true, message: '请输入店铺名称', trigger: 'blur'}
+                    ],
+                    address: [
+                        {required: true, message: '请输入详细地址', trigger: 'blur'}
+                    ],
+                    tel: [
+                        {required: true, message: '请输入联系电话'},
+                        {type: 'number', message: '电话号码必须是数字'}
+                    ]
+                }
             }
         },
         methods: {
@@ -222,7 +234,48 @@
                 this.dialogVisible = true;
             },
             addActivity () {
+                const val = this.discountsVal;
+                let newInfo = {};
 
+                if(this.activityInfo === ''){
+                    this.dialogVisible = false;
+                    return false;
+                }
+
+                switch(val) {
+                    case '满减优惠':
+                        newInfo = {
+                            activityTitle: '减',
+                            activityName: '满减优惠',
+                            activityInfo: this.activityInfo
+                        }
+                    break;
+                    case '优惠大酬宾':
+                        newInfo = {
+                            activityTitle: '特',
+                            activityName: '优惠大酬宾',
+                            activityInfo: this.activityInfo
+                        }
+                    break;
+                    case '新用户立减':
+                        newInfo = {
+                            activityTitle: '新',
+                            activityName: '新用户立减',
+                            activityInfo: this.activityInfo
+                        }
+                    break;
+                    case '进店领券':
+                        newInfo = {
+                            activityTitle: '领',
+                            activityName: '进店领券',
+                            activityInfo: this.activityInfo
+                        }
+                    break;
+                }
+
+                this.addShopsForm.activityData.push(newInfo);
+                this.activityInfo = '';
+                this.dialogVisible = false;
             },
             deleteActivity (res) {
                 this.addShopsForm.activityData.splice(res.$index, 1);
