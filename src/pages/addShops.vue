@@ -10,7 +10,7 @@
                     <el-input v-model="addShopsForm.address" placeholder="请输入地址"></el-input>
                 </el-form-item>
                 <el-form-item label="联系电话" prop="tel">
-                    <el-input v-model.number="addShopsForm.tel" maxlength="11" placeholder="请输入电话"></el-input>
+                    <el-input v-model.number="addShopsForm.tel" :maxlength="11" placeholder="请输入电话"></el-input>
                 </el-form-item>
                 <el-form-item label="店铺简介">
                     <el-input v-model="addShopsForm.introduce" placeholder="请输入店铺简介"></el-input>
@@ -111,7 +111,7 @@
                     </el-table>
                 </el-row>
                 <el-row class="boxFlexCen mrt_20">
-                    <el-button type="primary" @click="submitForm('addShopsForm')">立即创建</el-button>
+                    <el-button type="primary" @click="submitForm('addShopsForm')" :loading="showLoading">立即创建</el-button>
                 </el-row>
             </el-form>
         </div>
@@ -181,6 +181,7 @@
                 imageUrl: '',
                 activityInfo: '',
                 dialogVisible: false,
+                showLoading: false,
                 rules: {
                     shopName: [
                         {required: true, message: '请输入店铺名称', trigger: 'blur'}
@@ -190,7 +191,8 @@
                     ],
                     tel: [
                         {required: true, message: '请输入联系电话'},
-                        {type: 'number', message: '电话号码必须是数字'}
+                        {type: 'number', message: '电话号码必须是数字'},
+                        {pattern: /^(0|86|17951)?(13[0-9]|15[012356789]|17[0678]|18[0-9]|14[57])[0-9]{8}$/, message: '电话号格式不正确', trigger: 'blur'}
                     ]
                 }
             }
@@ -208,8 +210,25 @@
             upSendChange (value) {
 
             },
-            submitForm (formName) {
-
+            async submitForm (formName) {
+                this.$refs[formName].validate(async (valid) => {
+                    if(valid){
+                        this.showLoading = true;
+                        const res = await addShops();
+                        if(res.data === true){
+                            this.$message({
+                                message: '数据提交成功！',
+                                type: 'success'
+                            });
+                        }
+                        this.showLoading = false;
+                    } else {
+                        this.$message({
+                            message: '表单有必填项验证不通过！',
+                            type: 'error'
+                        });
+                    }
+                });
             },
             handleAvatarSuccess (res, file) {
                 this.imageUrl = URL.createObjectURL(file.raw);
