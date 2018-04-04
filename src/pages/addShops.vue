@@ -47,7 +47,6 @@
                 <el-form-item label="营业时间">
                     <el-time-picker
                         is-range
-                        arrow-control
                         format="HH:mm"
                         v-model="addShopsForm.timer"
                         range-separator="至"
