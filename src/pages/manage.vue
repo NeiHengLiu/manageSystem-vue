@@ -29,7 +29,7 @@
                             <span>添加数据</span>
                         </template>
                         <el-menu-item index="addShops">添加商铺</el-menu-item>
-                        <el-menu-item index="3_1">添加商品</el-menu-item>
+                        <el-menu-item index="addGoods">添加商品</el-menu-item>
                     </el-submenu>
                     <el-submenu index="4">
                         <template slot="title">
