@@ -14,6 +14,7 @@
 
 <script>
     import headTop from '../components/headTop'
+    import {  } from '../api/getData'
     export default {
         data () {
             return {
