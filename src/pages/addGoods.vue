@@ -90,6 +90,9 @@
                         </el-table>
                     </el-row>
                 </template>
+                <el-form-item>
+                    <el-button type="primary" @click="submitAddGoodsForm('addGoodsForm')">确认添加食品</el-button>
+                </el-form-item>
             </el-form>
             <!--E 添加食品 -->
 
@@ -168,7 +171,7 @@
                     ]
                 },
                 showEdit: false,
-                addScopeVisible: true,
+                addScopeVisible: false,
                 foodSpecs: 'one'
             }
         },
@@ -182,17 +185,43 @@
             beforeAvatarUpload (file) {
 
             },
-            deleteScope (res) {
-                console.log(res);
+            deleteScope (res) {     // 删除规格
+                let specData = this.addGoodsForm.specData;
+                if(specData.length > 1){
+                    specData.splice(res.$index, 1);
+                } else {
+                    this.$notify({
+                        type: 'error',
+                        title: '错误',
+                        message: '必须保留一个规格！'
+                    });
+                }
             },
             addSpec (formName) {    // 添加规格
-
+                this.$refs[formName].validate((valid) => {
+                    if(valid){
+                        this.addGoodsForm.specData.push({...this.addSpecForm});
+                        this.emptySpec(formName);
+                    }
+                });
             },
             emptySpec (formName) {  // 清空规格
                 this.addSpecForm.packExpense = 0;
                 this.addSpecForm.price = 0;
                 this.$refs[formName].resetFields();
                 this.addScopeVisible = false;
+            },
+            submitAddGoodsForm (formName) {    // 确认添加食品
+                this.$refs[formName].validate((valid) => {
+                    if(valid){
+
+                    } else {
+                        this.$message({
+                            type: 'error',
+                            message: '表单中有必填项未通过验证！'
+                        });
+                    }
+                });
             }
         },
         components: {
