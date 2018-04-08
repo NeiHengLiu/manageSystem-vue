@@ -21,7 +21,7 @@
                             <el-input v-model="selectGoodsForm.speciesInfo"></el-input>
                         </el-form-item>
                         <el-form-item>
-                            <el-button type="primary">提交</el-button>
+                            <el-button type="primary" @click="submitFoodSpecies">提交</el-button>
                         </el-form-item>
                     </div>
                 </el-row>
@@ -37,13 +37,13 @@
             <header class="form_header mrt_40">添加食品</header>
             <el-form ref="addGoodsForm" :model="addGoodsForm" :rules="rules" label-width="100px" class="add_goods_form add_goods_line">
                 <el-form-item label="食品名称" prop="foodName">
-                    <el-input></el-input>
+                    <el-input v-model="addGoodsForm.foodName"></el-input>
                 </el-form-item>
                 <el-form-item label="食品活动">
-                    <el-input></el-input>
+                    <el-input v-model="addGoodsForm.foodActivity"></el-input>
                 </el-form-item>
                 <el-form-item label="食品详情">
-                    <el-input></el-input>
+                    <el-input v-model="addGoodsForm.foodInfo"></el-input>
                 </el-form-item>
                 <el-form-item label="上传食品图片">
                     <el-upload
@@ -124,7 +124,7 @@
 
 <script>
     import headTop from '../components/headTop'
-    import {  } from '../api/getData'
+    import { addGoods } from '../api/getData'
     export default {
         data () {
             return {
@@ -148,6 +148,9 @@
                     speciesInfo: ''
                 },
                 addGoodsForm: {
+                    foodName: '',
+                    foodActivity: '',
+                    foodInfo: '',
                     charFood: '',
                     specData: [
                         {
@@ -185,6 +188,9 @@
             beforeAvatarUpload (file) {
 
             },
+            submitFoodSpecies () {      // 添加食品种类
+
+            },
             deleteScope (res) {     // 删除规格
                 let specData = this.addGoodsForm.specData;
                 if(specData.length > 1){
@@ -211,10 +217,17 @@
                 this.$refs[formName].resetFields();
                 this.addScopeVisible = false;
             },
-            submitAddGoodsForm (formName) {    // 确认添加食品
-                this.$refs[formName].validate((valid) => {
+            async submitAddGoodsForm (formName) {    // 确认添加食品
+                this.$refs[formName].validate(async (valid) => {
                     if(valid){
-
+                        let res = await addGoods({...this.addGoodsForm,...this.selectGoodsForm});
+                        console.log(res);
+                        if(res.data) {
+                            this.$message({
+                                type: 'success',
+                                message: '商品添加成功！'
+                            });
+                        }
                     } else {
                         this.$message({
                             type: 'error',
