@@ -124,7 +124,7 @@
 
 <script>
     import headTop from '../components/headTop'
-    import { addGoods } from '../api/getData'
+    import { addGoods, addFoodTypes } from '../api/getData'
     export default {
         data () {
             return {
@@ -188,8 +188,29 @@
             beforeAvatarUpload (file) {
 
             },
-            submitFoodSpecies () {      // 添加食品种类
-
+            async submitFoodSpecies () {      // 添加食品种类
+                let name = this.selectGoodsForm.speciesName.replace(/(^\s*)|(\s*$)/g, '');
+                let info = this.selectGoodsForm.speciesInfo.replace(/(^\s*)|(\s*$)/g, '');
+                if(!(name === '')){
+                    let res = await addFoodTypes({speciesName: name, speciesInfo: info});
+                    console.log(res);
+                    if(res.state === true){
+                        this.$message({
+                            type: 'success',
+                            message: '添加成功'
+                        });
+                        
+                        this.showEdit = !this.showEdit;
+                        this.selectGoodsForm.speciesName = '';
+                        this.selectGoodsForm.speciesInfo = '';
+                    }
+                } else {
+                    this.$notify({
+                        type: 'error',
+                        title: '错误',
+                        message: '必须填写食品种类！'
+                    });
+                }
             },
             deleteScope (res) {     // 删除规格
                 let specData = this.addGoodsForm.specData;

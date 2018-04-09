@@ -71,3 +71,9 @@ export const addShops = (data) => fetch('/addData/addShops', data, 'POST');
  */
 
 export const addGoods = (data) => fetch('/addData/addGoods', data, 'POST');
+
+/**
+ * 添加商品/添加食品种类
+ */
+
+export const addFoodTypes = (data) => fetch('/addData/addGoods/addFoodTypes', data, 'POST');
