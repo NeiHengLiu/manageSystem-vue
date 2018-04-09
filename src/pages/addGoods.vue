@@ -277,6 +277,11 @@
                             this.addGoodsForm.foodActivity = '';
                             this.addGoodsForm.foodInfo = '';
                             this.addGoodsForm.charFood = [];
+                            this.addGoodsForm.specData = [{
+                                specName: '默认',
+                                packExpense: 0,
+                                price: 0
+                            }];
                         }
                     } else {
                         this.$message({
