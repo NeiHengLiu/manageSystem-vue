@@ -57,8 +57,8 @@
                     </el-upload>
                 </el-form-item>
                 <el-form-item label="食品特点">
-                    <el-select v-model="addGoodsForm.charFood">
-                        <el-option key="1" label="好吃" value="1"></el-option>
+                    <el-select multiple multiple-limit="4" v-model="addGoodsForm.charFood">
+                        <el-option :key="item.value" :label="item.label" :value="item.value" v-for="item in addGoodsForm.charFoodList"></el-option>
                     </el-select>
                 </el-form-item>
                 <el-form-item label="食品规格">
@@ -151,7 +151,33 @@
                     foodName: '',
                     foodActivity: '',
                     foodInfo: '',
-                    charFood: '',
+                    charFood: [],
+                    charFoodList: [
+                        {
+                            label: '香甜',
+                            value: '01'
+                        },
+                        {
+                            label: '可口',
+                            value: '02'
+                        },
+                        {
+                            label: '美味',
+                            value: '03'
+                        },
+                        {
+                            label: '入口即化',
+                            value: '04'
+                        },
+                        {
+                            label: '冰镇',
+                            value: '05'
+                        },
+                        {
+                            label: '暖和',
+                            value: '06'
+                        }
+                    ],
                     specData: [
                         {
                             specName: '默认',
@@ -193,7 +219,6 @@
                 let info = this.selectGoodsForm.speciesInfo.replace(/(^\s*)|(\s*$)/g, '');
                 if(!(name === '')){
                     let res = await addFoodTypes({speciesName: name, speciesInfo: info});
-                    console.log(res);
                     if(res.state === true){
                         this.$message({
                             type: 'success',
@@ -242,12 +267,16 @@
                 this.$refs[formName].validate(async (valid) => {
                     if(valid){
                         let res = await addGoods({...this.addGoodsForm,...this.selectGoodsForm});
-                        console.log(res);
-                        if(res.data) {
+                        if(res.state) {
                             this.$message({
                                 type: 'success',
                                 message: '商品添加成功！'
                             });
+
+                            this.addGoodsForm.foodName = '';
+                            this.addGoodsForm.foodActivity = '';
+                            this.addGoodsForm.foodInfo = '';
+                            this.addGoodsForm.charFood = [];
                         }
                     } else {
                         this.$message({
