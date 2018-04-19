@@ -57,7 +57,7 @@
                     </el-upload>
                 </el-form-item>
                 <el-form-item label="食品特点">
-                    <el-select multiple multiple-limit="4" v-model="addGoodsForm.charFood">
+                    <el-select :multiple="true" :multiple-limit="4" v-model="addGoodsForm.charFood">
                         <el-option :key="item.value" :label="item.label" :value="item.value" v-for="item in addGoodsForm.charFoodList"></el-option>
                     </el-select>
                 </el-form-item>

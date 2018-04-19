@@ -52,21 +52,30 @@
             async submitForm(formName) {
                 this.$refs[formName].validate(async (valid) =>{
                     if(valid){
-                        this.loading = true;
-                        const res = await login({userName: this.loginForm.userName, userPwd: this.loginForm.userPwd});
-                        if(res.data){
-                            this.$message({
-                                type: 'success',
-                                message: '登录成功'
-                            });
-                            this.$router.push('/manage');
-                        } else {
-                            this.$message({
+                        try {
+                            this.loading = true;
+                            const res = await login({userName: this.loginForm.userName, userPwd: this.loginForm.userPwd});
+                            if(res.data){
+                                this.$message({
+                                    type: 'success',
+                                    message: '登录成功'
+                                });
+                                this.$router.push('/manage');
+                            } else {
+                                this.$message({
+                                    type: 'error',
+                                    message: '账号或密码错误'
+                                });
+                            }
+                            this.loading = false;
+                        } catch (error){
+                            this.$notify({
                                 type: 'error',
-                                message: '账号或密码错误'
+                                title: '错误',
+                                message: '服务器开小差了，重新试一下吧！'
                             });
+                            this.loading = false;
                         }
-                        this.loading = false;
                     }
                 })
             }

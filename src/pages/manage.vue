@@ -36,7 +36,7 @@
                             <i class="el-icon-star-on"></i>
                             <span>图表</span>
                         </template>
-                        <el-menu-item index="4_1">用户分布</el-menu-item>
+                        <el-menu-item index="userDistribution">用户分布</el-menu-item>
                     </el-submenu>
                     <el-submenu index="5">
                         <template slot="title">
