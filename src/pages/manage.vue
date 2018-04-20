@@ -50,14 +50,14 @@
                             <i class="el-icon-setting"></i>
                             <span>设置</span>
                         </template>
-                        <el-menu-item index="6_1">管理员设置</el-menu-item>
+                        <el-menu-item index="settingUp">管理员设置</el-menu-item>
                     </el-submenu>
                     <el-submenu index="7">
                         <template slot="title">
                             <i class="el-icon-warning"></i>
                             <span>说明</span>
                         </template>
-                        <el-menu-item index="7_1">说明</el-menu-item>
+                        <el-menu-item index="instructions">说明</el-menu-item>
                     </el-submenu>
                 </el-menu>
             </el-col>
