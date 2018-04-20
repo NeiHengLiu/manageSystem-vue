@@ -14,7 +14,7 @@ const adminList = r => require.ensure([], () => r(require('../pages/adminList'))
 const addShops = r => require.ensure([], () => r(require('../pages/addShops')), 'addShops');
 const addGoods = r => require.ensure([], () => r(require('../pages/addGoods')), 'addGoods');
 const userDistribution = r => require.ensure([], () => r(require('../pages/userDistribution')), 'userDistribution');
-
+const richTextEditor = r => require.ensure([], () => r(require('../pages/richTextEditor')), 'richTextEditor');
 const settingUp = r => require.ensure([], () => r(require('../pages/settingUp')), 'settingUp');
 const instructions = r => require.ensure([], () => r(require('../pages/instructions')), 'instructions');
 
@@ -71,6 +71,11 @@ const routes = [
 				path: '/userDistribution',
 				component: userDistribution,
 				meta: ['图表', '用户分布']
+			},
+			{
+				path: '/richTextEditor',
+				component: richTextEditor,
+				meta: ['编辑', '文本编辑']
 			},
 			{
 				path: '/settingUp',

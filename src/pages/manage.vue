@@ -43,7 +43,7 @@
                             <i class="el-icon-edit"></i>
                             <span>编辑</span>
                         </template>
-                        <el-menu-item index="5_1">文本编辑</el-menu-item>
+                        <el-menu-item index="richTextEditor">文本编辑</el-menu-item>
                     </el-submenu>
                     <el-submenu index="6">
                         <template slot="title">
