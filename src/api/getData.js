@@ -77,3 +77,9 @@ export const addGoods = (data) => fetch('/addData/addGoods', data, 'POST');
  */
 
 export const addFoodTypes = (data) => fetch('/addData/addGoods/addFoodTypes', data, 'POST');
+
+/**
+ * 图表/用户分布
+ */
+
+ export const userDistribution = () => fetch('/chart/userDistribution');
