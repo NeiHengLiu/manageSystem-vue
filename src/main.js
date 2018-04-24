@@ -9,8 +9,8 @@ import 'quill/dist/quill.snow.css'
 
 Vue.config.productionTip = false
 
-Vue.use(ElementUI);
-Vue.use(vueQuillEditor);
+Vue.use(ElementUI)
+Vue.use(vueQuillEditor)
 
 new Vue({
 	el: '#app',
