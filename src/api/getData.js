@@ -83,3 +83,9 @@ export const addFoodTypes = (data) => fetch('/addData/addGoods/addFoodTypes', da
  */
 
  export const userDistribution = () => fetch('/chart/userDistribution');
+
+ /**
+  * 编辑/文本编辑
+  */
+
+export const richTextEditor = (data) => fetch('/editor/richTextEditor', data, 'POST');
