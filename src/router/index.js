@@ -30,62 +30,98 @@ const routes = [
 			{
 				path: '',
 				component: home,
-				meta: []
+				meta: {
+					role: ['general'],
+					crumbs: []
+				}
 			},
 			{
 				path: '/userList',
 				component: userList,
-				meta: ['数据管理', '用户列表']
+				meta: {
+					role: ['general'],
+					crumbs: ['数据管理', '用户列表']
+				}
 			},
 			{
 				path: '/businessList',
 				component: businessList,
-				meta: ['数据管理', '商家列表']
+				meta: {
+					role: ['general'],
+					crumbs: ['数据管理', '商家列表']
+				}
 			},
 			{
 				path: '/foodList',
 				component: foodList,
-				meta: ['数据管理', '食品列表']
+				meta: {
+					role: ['general'],
+					crumbs: ['数据管理', '食品列表']
+				}
 			},
 			{
 				path: '/orderList',
 				component: orderList,
-				meta: ['数据管理', '订单列表']
+				meta: {
+					role: ['general'],
+					crumbs: ['数据管理', '订单列表']
+				}
 			},
 			{
 				path: '/adminList',
 				component: adminList,
-				meta: ['数据管理', '管理员列表']
+				meta: {
+					role: ['general'],
+					crumbs: ['数据管理', '管理员列表']
+				}
 			},
 			{
 				path: '/addShops',
 				component: addShops,
-				meta: ['添加数据', '添加商铺']
+				meta: {
+					role: ['general'],
+					crumbs: ['添加数据', '添加商铺']
+				}
 			},
 			{
 				path: '/addGoods',
 				component: addGoods,
-				meta: ['添加数据', '添加商品']
+				meta: {
+					role: ['general'],
+					crumbs: ['添加数据', '添加商品']
+				}
 			},
 			{
 				path: '/userDistribution',
 				component: userDistribution,
-				meta: ['图表', '用户分布']
+				meta: {
+					role: ['general'],
+					crumbs: ['图表', '用户分布']
+				}
 			},
 			{
 				path: '/richTextEditor',
 				component: richTextEditor,
-				meta: ['编辑', '文本编辑']
+				meta: {
+					role: ['general'],
+					crumbs: ['编辑', '文本编辑']
+				}
 			},
 			{
 				path: '/settingUp',
 				component: settingUp,
-				meta: ['设置', '管理员设置']
+				meta: {
+					role: ['admin'],
+					crumbs: ['设置', '管理员设置']
+				}
 			},
 			{
 				path: '/instructions',
 				component: instructions,
-				meta: ['说明', '说明']
+				meta: {
+					role: ['general'],
+					crumbs: ['说明', '说明']
+				}
 			}
 		]
 	}
