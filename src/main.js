@@ -21,7 +21,7 @@ router.beforeEach((to, from, next) => {
 	console.log(from);
 	console.log(next);
 	if(true){
-
+		next();
 	} else {
 
 	}

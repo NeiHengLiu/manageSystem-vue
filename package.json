@@ -13,6 +13,7 @@
     "axios": "^0.18.0",
     "echarts": "^4.0.4",
     "element-ui": "^2.3.2",
+    "js-cookie": "^2.2.0",
     "time-formater": "^1.0.1",
     "vue": "^2.5.2",
     "vue-quill-editor": "^3.0.6",
