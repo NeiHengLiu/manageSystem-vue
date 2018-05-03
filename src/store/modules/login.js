@@ -1,8 +1,8 @@
 import Cookies from 'js-cookie'
 
-const app = {
+const login = {
     state: {
-
+        token: Cookies.get('token')
     },
     mutations: {
         
@@ -12,4 +12,4 @@ const app = {
     }
 }
 
-export default app
+export default login
