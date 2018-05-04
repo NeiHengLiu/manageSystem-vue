@@ -77,6 +77,9 @@
                     ]
                 };
                 this.myChart.setOption(option);
+                window.onresize = () => {
+                    this.myChart.resize();
+                }
             }
         },
         watch: {

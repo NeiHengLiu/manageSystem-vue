@@ -48,6 +48,9 @@
                         ]
                     };
                 this.mychart.setOption(option);
+                window.onresize = () => {
+                    this.mychart.resize();
+                }
             }
         },
         watch: {
