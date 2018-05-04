@@ -17,8 +17,8 @@
                     </el-form-item>
                 </el-form>
                 <p class="tip">温馨提示:</p>
-                <p class="tip">用户名为：xiaobai</p>
-                <p class="tip">密码为：123456</p>
+                <p class="tip">用户名为：xiaobai&nbsp;&nbsp;&nbsp;&nbsp;密码为：123456</p>
+                <p class="tip">用户名为：admin&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;密码为：123456</p>
             </section>
         </transition>
     </div>
@@ -55,7 +55,7 @@
                         this.loading = true;
                         this.$store.dispatch('loginByUser', this.loginForm)
                         .then(data => {
-                            if(data.data){
+                            if(data.data.status){
                                 this.$message({
                                     type: 'success',
                                     message: '登录成功'
