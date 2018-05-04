@@ -7,10 +7,10 @@
                 </div>
                 <el-form ref="loginForm" :model="loginForm" :rules="rules">
                     <el-form-item prop="userName">
-                        <el-input v-model="loginForm.userName" placeholder="用户名"></el-input>
+                        <el-input v-model="loginForm.userName" @keyup.enter.native="submitForm('loginForm')" placeholder="用户名"></el-input>
                     </el-form-item>
                     <el-form-item prop="userPwd">
-                        <el-input type="password" v-model="loginForm.userPwd" placeholder="密码"></el-input>
+                        <el-input type="password" v-model="loginForm.userPwd" @keyup.enter.native="submitForm('loginForm')" placeholder="密码"></el-input>
                     </el-form-item>
                     <el-form-item>
                         <el-button type="primary" class="submit_btn" @click="submitForm('loginForm')" :loading="loading">登录</el-button>
