@@ -52,10 +52,10 @@
             async submitForm(formName) {
                 this.$refs[formName].validate(async (valid) =>{
                     if(valid){
-                        try {
-                            this.loading = true;
-                            const res = await login({userName: this.loginForm.userName, userPwd: this.loginForm.userPwd});
-                            if(res.data){
+                        this.loading = true;
+                        this.$store.dispatch('loginByUser', this.loginForm)
+                        .then(data => {
+                            if(data.data){
                                 this.$message({
                                     type: 'success',
                                     message: '登录成功'
@@ -68,14 +68,14 @@
                                 });
                             }
                             this.loading = false;
-                        } catch (error){
-                            this.$notify({
+                        }).catch(error => {
+                             this.$notify({
                                 type: 'error',
                                 title: '错误',
                                 message: '服务器开小差了，重新试一下吧！'
                             });
                             this.loading = false;
-                        }
+                        })
                     }
                 })
             }
