@@ -37,7 +37,6 @@ const user = {
                 const data = res.data;
                 commit('SET_TOKEN', data.token);
                 setToken(data.token);
-                console.log(data.token);
                 return Promise.resolve(res);
             } catch(error){
                 return Promise.reject(new Error('请求出错!'));
