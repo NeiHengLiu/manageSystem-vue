@@ -11,21 +11,12 @@ import App from './App'
 import router from './router'
 import store from './store'
 
-Vue.config.productionTip = false
+import './common/permission'
 
 Vue.use(ElementUI)
 Vue.use(vueQuillEditor)
 
-router.beforeEach((to, from, next) => {
-	console.log(to);
-	console.log(from);
-	console.log(next);
-	if(true){
-		next();
-	} else {
-
-	}
-})
+Vue.config.productionTip = false
 
 new Vue({
 	el: '#app',
