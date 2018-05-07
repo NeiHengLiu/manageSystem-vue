@@ -1,4 +1,4 @@
-import { login } from '../../api/getData'
+import { login, getUserInfo } from '../../api/getData'
 import { getToken, setToken, removeToken } from '../../utils/token'
 
 const user = {
@@ -40,6 +40,20 @@ const user = {
                 return Promise.resolve(res);
             } catch(error){
                 return Promise.reject(new Error('请求出错!'));
+            }
+        },
+        async getUserInfo ({ commit, state }) {
+            try{
+                const res = await getUserInfo({token: state.token});
+                const data = res.data;
+                commit('SET_ROLES', data.roles);
+                commit('SET_NAME', data.name);
+                commit('SET_DATE', data.date);
+                commit('SET_STATUS', data.status);
+                commit('SET_ID', data.id);
+                return Promise.resolve(res);
+            } catch(error) {
+                return Promise.error(new Error('请求出错！'));
             }
         }
     }

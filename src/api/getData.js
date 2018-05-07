@@ -89,3 +89,9 @@ export const addFoodTypes = (data) => fetch('/addData/addGoods/addFoodTypes', da
   */
 
 export const richTextEditor = (data) => fetch('/editor/richTextEditor', data, 'POST');
+
+/**
+ * 登录/获取用户信息
+ */
+
+export const getUserInfo = (data) => fetch('/login/getUserInfo', data);
