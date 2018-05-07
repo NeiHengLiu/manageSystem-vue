@@ -18,6 +18,7 @@ const richTextEditor = r => require.ensure([], () => r(require('../pages/richTex
 const settingUp = r => require.ensure([], () => r(require('../pages/settingUp')), 'settingUp');
 const instructions = r => require.ensure([], () => r(require('../pages/instructions')), 'instructions');
 
+// 通用路由
 const routes = [
 	{
 		path: '/',
@@ -31,98 +32,98 @@ const routes = [
 				path: '',
 				component: home,
 				meta: {
-					role: ['general'],
+					role: ['general', 'admin'],
 					crumbs: []
 				}
 			},
-			{
-				path: '/userList',
-				component: userList,
-				meta: {
-					role: ['general'],
-					crumbs: ['数据管理', '用户列表']
-				}
-			},
-			{
-				path: '/businessList',
-				component: businessList,
-				meta: {
-					role: ['general'],
-					crumbs: ['数据管理', '商家列表']
-				}
-			},
-			{
-				path: '/foodList',
-				component: foodList,
-				meta: {
-					role: ['general'],
-					crumbs: ['数据管理', '食品列表']
-				}
-			},
-			{
-				path: '/orderList',
-				component: orderList,
-				meta: {
-					role: ['general'],
-					crumbs: ['数据管理', '订单列表']
-				}
-			},
-			{
-				path: '/adminList',
-				component: adminList,
-				meta: {
-					role: ['general'],
-					crumbs: ['数据管理', '管理员列表']
-				}
-			},
-			{
-				path: '/addShops',
-				component: addShops,
-				meta: {
-					role: ['general'],
-					crumbs: ['添加数据', '添加商铺']
-				}
-			},
-			{
-				path: '/addGoods',
-				component: addGoods,
-				meta: {
-					role: ['general'],
-					crumbs: ['添加数据', '添加商品']
-				}
-			},
-			{
-				path: '/userDistribution',
-				component: userDistribution,
-				meta: {
-					role: ['general'],
-					crumbs: ['图表', '用户分布']
-				}
-			},
-			{
-				path: '/richTextEditor',
-				component: richTextEditor,
-				meta: {
-					role: ['admin'],
-					crumbs: ['编辑', '文本编辑']
-				}
-			},
-			{
-				path: '/settingUp',
-				component: settingUp,
-				meta: {
-					role: ['general'],
-					crumbs: ['设置', '管理员设置']
-				}
-			},
-			{
-				path: '/instructions',
-				component: instructions,
-				meta: {
-					role: ['general'],
-					crumbs: ['说明', '说明']
-				}
-			}
+			// {
+			// 	path: '/userList',
+			// 	component: userList,
+			// 	meta: {
+			// 		role: ['general', 'admin'],
+			// 		crumbs: ['数据管理', '用户列表']
+			// 	}
+			// },
+			// {
+			// 	path: '/businessList',
+			// 	component: businessList,
+			// 	meta: {
+			// 		role: ['general', 'admin'],
+			// 		crumbs: ['数据管理', '商家列表']
+			// 	}
+			// },
+			// {
+			// 	path: '/foodList',
+			// 	component: foodList,
+			// 	meta: {
+			// 		role: ['general', 'admin'],
+			// 		crumbs: ['数据管理', '食品列表']
+			// 	}
+			// },
+			// {
+			// 	path: '/orderList',
+			// 	component: orderList,
+			// 	meta: {
+			// 		role: ['general', 'admin'],
+			// 		crumbs: ['数据管理', '订单列表']
+			// 	}
+			// },
+			// {
+			// 	path: '/adminList',
+			// 	component: adminList,
+			// 	meta: {
+			// 		role: ['general', 'admin'],
+			// 		crumbs: ['数据管理', '管理员列表']
+			// 	}
+			// },
+			// {
+			// 	path: '/addShops',
+			// 	component: addShops,
+			// 	meta: {
+			// 		role: ['general', 'admin'],
+			// 		crumbs: ['添加数据', '添加商铺']
+			// 	}
+			// },
+			// {
+			// 	path: '/addGoods',
+			// 	component: addGoods,
+			// 	meta: {
+			// 		role: ['general', 'admin'],
+			// 		crumbs: ['添加数据', '添加商品']
+			// 	}
+			// },
+			// {
+			// 	path: '/userDistribution',
+			// 	component: userDistribution,
+			// 	meta: {
+			// 		role: ['general', 'admin'],
+			// 		crumbs: ['图表', '用户分布']
+			// 	}
+			// },
+			// {
+			// 	path: '/richTextEditor',
+			// 	component: richTextEditor,
+			// 	meta: {
+			// 		role: ['admin'],
+			// 		crumbs: ['编辑', '文本编辑']
+			// 	}
+			// },
+			// {
+			// 	path: '/settingUp',
+			// 	component: settingUp,
+			// 	meta: {
+			// 		role: ['general', 'admin'],
+			// 		crumbs: ['设置', '管理员设置']
+			// 	}
+			// },
+			// {
+			// 	path: '/instructions',
+			// 	component: instructions,
+			// 	meta: {
+			// 		role: ['general', 'admin'],
+			// 		crumbs: ['说明', '说明']
+			// 	}
+			// }
 		]
 	}
 ]
@@ -130,3 +131,95 @@ const routes = [
 export default new Router({
 	routes
 })
+
+// 动态挂载路由
+export const asyncRouter = [
+	{
+		path: '/userList',
+		component: userList,
+		meta: {
+			role: ['general', 'admin'],
+			crumbs: ['数据管理', '用户列表']
+		}
+	},
+	{
+		path: '/businessList',
+		component: businessList,
+		meta: {
+			role: ['general', 'admin'],
+			crumbs: ['数据管理', '商家列表']
+		}
+	},
+	{
+		path: '/foodList',
+		component: foodList,
+		meta: {
+			role: ['general', 'admin'],
+			crumbs: ['数据管理', '食品列表']
+		}
+	},
+	{
+		path: '/orderList',
+		component: orderList,
+		meta: {
+			role: ['general', 'admin'],
+			crumbs: ['数据管理', '订单列表']
+		}
+	},
+	{
+		path: '/adminList',
+		component: adminList,
+		meta: {
+			role: ['general', 'admin'],
+			crumbs: ['数据管理', '管理员列表']
+		}
+	},
+	{
+		path: '/addShops',
+		component: addShops,
+		meta: {
+			role: ['general', 'admin'],
+			crumbs: ['添加数据', '添加商铺']
+		}
+	},
+	{
+		path: '/addGoods',
+		component: addGoods,
+		meta: {
+			role: ['general', 'admin'],
+			crumbs: ['添加数据', '添加商品']
+		}
+	},
+	{
+		path: '/userDistribution',
+		component: userDistribution,
+		meta: {
+			role: ['general', 'admin'],
+			crumbs: ['图表', '用户分布']
+		}
+	},
+	{
+		path: '/richTextEditor',
+		component: richTextEditor,
+		meta: {
+			role: ['admin'],
+			crumbs: ['编辑', '文本编辑']
+		}
+	},
+	{
+		path: '/settingUp',
+		component: settingUp,
+		meta: {
+			role: ['general', 'admin'],
+			crumbs: ['设置', '管理员设置']
+		}
+	},
+	{
+		path: '/instructions',
+		component: instructions,
+		meta: {
+			role: ['general', 'admin'],
+			crumbs: ['说明', '说明']
+		}
+	}
+]
