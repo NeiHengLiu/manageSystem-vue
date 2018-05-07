@@ -103,7 +103,7 @@ const routes = [
 				path: '/richTextEditor',
 				component: richTextEditor,
 				meta: {
-					role: ['general'],
+					role: ['admin'],
 					crumbs: ['编辑', '文本编辑']
 				}
 			},
@@ -111,7 +111,7 @@ const routes = [
 				path: '/settingUp',
 				component: settingUp,
 				meta: {
-					role: ['admin'],
+					role: ['general'],
 					crumbs: ['设置', '管理员设置']
 				}
 			},
