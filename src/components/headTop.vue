@@ -16,6 +16,7 @@
 
 <script>
     import { logout } from '../api/getData'
+    import { removeToken } from '../utils/token'
     export default {
         methods: {
             async dropdownHandle (value) {
@@ -28,6 +29,7 @@
                             type: 'success',
                             message: '退出成功'
                         });
+                        removeToken();
                         this.$router.push('/');
                     } else {
                         this.$message({

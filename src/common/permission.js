@@ -1,4 +1,5 @@
 import router from '../router'
+import { Message } from 'element-ui'
 import { getToken } from '../utils/token'
 
 router.beforeEach((to, from, next) => {
@@ -16,6 +17,7 @@ router.beforeEach((to, from, next) => {
         if(to.path === '/'){
             next()
         } else {
+            Message.error('登录已过期，请重新登录！')
             next('/')
         }
     }
