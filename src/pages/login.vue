@@ -25,7 +25,6 @@
 </template>
 
 <script>
-    import { login } from '../api/getData'
     export default {
         data () {
             return {
