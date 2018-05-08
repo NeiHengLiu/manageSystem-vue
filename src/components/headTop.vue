@@ -15,7 +15,6 @@
 </template>
 
 <script>
-    import { logout } from '../api/getData'
     export default {
         methods: {
             async dropdownHandle (value) {
