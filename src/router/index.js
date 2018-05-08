@@ -19,7 +19,7 @@ const settingUp = r => require.ensure([], () => r(require('../pages/settingUp'))
 const instructions = r => require.ensure([], () => r(require('../pages/instructions')), 'instructions');
 
 // 通用路由
-const routes = [
+export const commonRouters = [
 	{
 		path: '/',
 		component: login
@@ -35,8 +35,8 @@ const routes = [
 					role: ['general', 'admin'],
 					crumbs: []
 				}
-			},
-			// {
+			}
+			// ,{
 			// 	path: '/userList',
 			// 	component: userList,
 			// 	meta: {
@@ -129,11 +129,11 @@ const routes = [
 ]
 
 export default new Router({
-	routes
+	routes: commonRouters
 })
 
 // 动态挂载路由
-export const asyncRouter = [
+export const asyncRouters = [
 	{
 		path: '/userList',
 		component: userList,

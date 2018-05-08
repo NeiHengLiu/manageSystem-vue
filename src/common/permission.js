@@ -7,16 +7,24 @@ router.beforeEach((to, from, next) => {
 	// console.log(to);
 	// console.log(from);
     // console.log(next);
-    //console.log(getToken());
+    // console.log(getToken());
     if(getToken()){
         if(to.path === '/'){
             next('/manage')
         } else {
-            next()
-            store.dispatch('getUserInfo')
-            .then(res => {
-                
-            })
+            if(store.getters.roles.length === 0){
+                store.dispatch('getUserInfo').then(res => {
+                    const roles = store.getters.roles;
+                    store.dispatch('getRouters', roles).then(() => {
+                        router.addRoutes(store.getters.addRouters)
+                        next({ ...to, replace: true })
+                    })
+                }).catch(() => {
+                    next({path: '/'});
+                })
+            } else {
+                next()
+            }
         }
     } else {
         if(to.path === '/'){
