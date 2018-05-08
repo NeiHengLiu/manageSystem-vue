@@ -16,27 +16,27 @@
 
 <script>
     import { logout } from '../api/getData'
-    import { removeToken } from '../utils/token'
     export default {
         methods: {
             async dropdownHandle (value) {
                 if(value === 'manage'){
                     this.$router.push('/manage');
                 } else if(value === 'exit'){
-                    let res = await logout();
-                    if(res.data){
-                        this.$message({
-                            type: 'success',
-                            message: '退出成功'
-                        });
-                        removeToken();
-                        this.$router.push('/');
-                    } else {
-                        this.$message({
-                            type: 'error',
-                            message: '退出失败，请重试'
-                        });
-                    }
+                    this.$store.dispatch('fedLogout').then(res => {
+                        console.log(res);
+                        if(res.data){
+                            this.$message({
+                                type: 'success',
+                                message: '退出成功'
+                            });
+                            this.$router.push('/');
+                        } else {
+                            this.$message({
+                                type: 'error',
+                                message: '退出失败，请重试'
+                            });
+                        }
+                    })
                 }
             }
         }

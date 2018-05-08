@@ -20,7 +20,8 @@ router.beforeEach((to, from, next) => {
                         next({ ...to, replace: true })
                     })
                 }).catch(() => {
-                    next({path: '/'});
+                    Message.error('拉取用户信息失败，请重新登录！')
+                    next({path: '/'})
                 })
             } else {
                 next()

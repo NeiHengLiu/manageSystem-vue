@@ -52,8 +52,7 @@
                 this.$refs[formName].validate(async (valid) =>{
                     if(valid){
                         this.loading = true;
-                        this.$store.dispatch('loginByUser', this.loginForm)
-                        .then(data => {
+                        this.$store.dispatch('loginByUser', this.loginForm).then(data => {
                             if(data.data.status){
                                 this.$message({
                                     type: 'success',

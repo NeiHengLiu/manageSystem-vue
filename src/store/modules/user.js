@@ -1,4 +1,4 @@
-import { login, getUserInfo } from '../../api/getData'
+import { login, logout, getUserInfo } from '../../api/getData'
 import { getToken, setToken, removeToken } from '../../utils/token'
 
 const user = {
@@ -54,6 +54,21 @@ const user = {
                 return Promise.resolve(res);
             } catch(error) {
                 return Promise.error(new Error('请求出错！'));
+            }
+        },
+        async fedLogout ({ commit }) {
+            try{
+                const res = await logout();
+                commit('SET_TOKEN', '');
+                commit('SET_ROLES', []);
+                commit('SET_NAME', '');
+                commit('SET_DATE', '');
+                commit('SET_STATUS', '');
+                commit('SET_ID', '');
+                removeToken();
+                return Promise.resolve(res);
+            } catch(error){
+                return Promise.reject('请求出错！');
             }
         }
     }
