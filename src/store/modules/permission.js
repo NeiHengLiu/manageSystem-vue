@@ -4,12 +4,10 @@ import { commonRouters, asyncRouters } from '../../router'
  * 判断是否与当前用户权限匹配
  */
 const hasPermission = (route, roles) => {
-    console.log(route);
-    console.log(roles);
-    if(route.meta.role && roles.length){
+    if(route.meta && route.meta.role){
         return roles.some(res => route.meta.role.indexOf(res) >= 0);
     } else {
-        return false;
+        return true;
     }
 }
 
@@ -41,10 +39,6 @@ const permission = {
     actions: {
         getRouters ({ commit }, routersData) {
             return new Promise(resolve => {
-                // console.log(commonRouters);
-                // console.log(asyncRouters);
-                // console.log(routersData);
-
                 let currentRouters;
                 currentRouters = filterAsyncRouter(asyncRouters, routersData);
                 commit('SET_ROUTERS', currentRouters);

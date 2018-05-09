@@ -3,6 +3,11 @@ import store from '../store'
 import { Message } from 'element-ui'
 import { getToken } from '../utils/token'
 
+const hasPermission = (route, roles) => {
+    if(route === undefined) return false;
+    return roles.some(res => route.indexOf(res) >= 0 );
+}
+
 router.beforeEach((to, from, next) => {
     if(getToken()){
         if(to.path === '/'){
@@ -25,7 +30,11 @@ router.beforeEach((to, from, next) => {
                     })
                 })
             } else {
-                next()
+                if(hasPermission(to.meta.role, store.getters.roles)){
+                    next();
+                } else {
+                    next({ path: '/page_401', replace: true });
+                }
             }
         }
     } else {
