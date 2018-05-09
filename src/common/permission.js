@@ -10,6 +10,7 @@ router.beforeEach((to, from, next) => {
     // console.log(getToken());
     if(getToken()){
         if(to.path === '/'){
+            Message.success('您之前登录过，系统已自动登录！');
             next('/manage')
         } else {
             if(store.getters.roles.length === 0){
@@ -20,8 +21,12 @@ router.beforeEach((to, from, next) => {
                         next({ ...to, replace: true })
                     })
                 }).catch(() => {
-                    Message.error('拉取用户信息失败，请重新登录！')
-                    next({path: '/'})
+                    store.dispatch('fedLogout').then(res => {
+                        if(res.data){
+                            Message.error('拉取用户信息失败，请重新登录！')
+                            next({path: '/'})
+                        }
+                    })
                 })
             } else {
                 next()

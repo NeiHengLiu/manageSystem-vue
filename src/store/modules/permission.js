@@ -1,8 +1,5 @@
 import { commonRouters, asyncRouters } from '../../router'
 
-console.log(commonRouters);
-console.log(asyncRouters);
-
 const permission = {
     state: {
         routers: commonRouters,
@@ -16,6 +13,8 @@ const permission = {
     actions: {
         getRouters ({ commit }, routersData) {
             return new Promise(resolve => {
+                console.log(commonRouters);
+                console.log(asyncRouters);
                 console.log(routersData)
                 commit('SET_ROUTERS', asyncRouters)
                 resolve()

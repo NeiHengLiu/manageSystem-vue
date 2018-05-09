@@ -22,7 +22,6 @@
                     this.$router.push('/manage');
                 } else if(value === 'exit'){
                     this.$store.dispatch('fedLogout').then(res => {
-                        console.log(res);
                         if(res.data){
                             this.$message({
                                 type: 'success',
