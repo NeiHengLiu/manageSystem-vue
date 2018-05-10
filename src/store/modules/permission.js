@@ -27,6 +27,7 @@ const filterAsyncRouter = (asyncRouters, roles) => {
         }
 
     });
+    console.log(currentRouters);
     return currentRouters;
 }
 

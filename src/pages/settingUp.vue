@@ -4,10 +4,10 @@
         <div class="baseList_table_conter">
             <h1 class="title">管理员信息</h1>
             <div class="info">
-                <p>姓名：xiaobai</p>
-                <p>注册时间：2018-02-12 15:44</p>
-                <p>管理员权限：管理员</p>
-                <p>管理员 ID：6819</p>
+                <p>姓名：{{ name }}</p>
+                <p>注册时间：{{ date }}</p>
+                <p>管理员权限：{{ status }}</p>
+                <p>管理员 ID：{{ id }}</p>
             </div>
         </div>
     </div>
@@ -15,6 +15,7 @@
 
 <script>
     import headTop from '../components/headTop'
+    import { mapGetters } from 'vuex'
     export default {
         data () {
             return {
@@ -23,6 +24,14 @@
         },
         components: {
             headTop
+        },
+        computed: {
+            ...mapGetters([
+                'name',
+                'date',
+                'status',
+                'id'
+            ])
         }
     }
 </script>

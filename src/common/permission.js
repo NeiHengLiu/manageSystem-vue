@@ -15,7 +15,9 @@ router.beforeEach((to, from, next) => {
             next('/manage')
         } else {
             if(store.getters.roles.length === 0){
-                store.dispatch('getUserInfo').then(res => {
+                console.log('执行了');
+                store.dispatch('getUserInfo').then((res) => {
+                    console.log(res);
                     const roles = store.getters.roles;
                     store.dispatch('getRouters', roles).then(() => {
                         router.addRoutes(store.getters.addRouters)
