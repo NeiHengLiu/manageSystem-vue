@@ -16,11 +16,7 @@ const hasPermission = (route, roles) => {
  */
 const filterAsyncRouter = (asyncRouters, roles) => {
     const currentRouters = asyncRouters.filter(route => {
-        
         if(hasPermission(route, roles)){
-            if(route.children && route.children.length){
-                route.children = filterAsyncRouter(route.children, roles);
-            }
             return true;
         } else {
             return false;
