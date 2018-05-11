@@ -59,7 +59,7 @@
                         </template>
                         <el-menu-item index="instructions">说明</el-menu-item>
                     </el-submenu> -->
-                    <el-submenu :index="(index+2)" popper-class="submenu_bg" v-for="(item, index) in menuList">
+                    <el-submenu :index="(index+2).toString()" popper-class="submenu_bg" v-for="(item, index) in menuList">
                         <template slot="title">
                             <i class="el-icon-document"></i>
                             <span>{{ item.parent.title }}</span>
