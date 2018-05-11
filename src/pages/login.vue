@@ -29,8 +29,8 @@
         data () {
             return {
                 loginForm: {
-                    userName: 'xiaobai',
-                    userPwd: '123456'
+                    userName: '',
+                    userPwd: ''
                 },
                 rules: {
                     userName: [
