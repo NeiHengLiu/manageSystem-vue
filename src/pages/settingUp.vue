@@ -8,6 +8,7 @@
                 <p>注册时间：{{ date }}</p>
                 <p>管理员权限：{{ status }}</p>
                 <p>管理员 ID：{{ id }}</p>
+                <p>登录时间：{{ loginTime }}</p>
             </div>
         </div>
     </div>
@@ -30,7 +31,8 @@
                 'name',
                 'date',
                 'status',
-                'id'
+                'id',
+                'loginTime'
             ])
         }
     }

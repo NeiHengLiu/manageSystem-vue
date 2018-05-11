@@ -8,7 +8,8 @@ const user = {
         name: '',
         date: '',
         status: '',
-        id: ''
+        id: '',
+        loginTime: ''
     },
     mutations: {
         SET_TOKEN (state, token) {
@@ -28,6 +29,9 @@ const user = {
         },
         SET_ID (state, id) {
             state.id = id
+        },
+        SET_LOGINTIME (state, loginTime) {
+            state.loginTime = loginTime
         }
     },
     actions: {
@@ -51,6 +55,7 @@ const user = {
                 commit('SET_DATE', data.date);
                 commit('SET_STATUS', data.status);
                 commit('SET_ID', data.id);
+                commit('SET_LOGINTIME', data.loginTime);
                 return Promise.resolve(res);
             } catch(error) {
                 return Promise.error(new Error('请求出错！'));
@@ -65,6 +70,7 @@ const user = {
                 commit('SET_DATE', '');
                 commit('SET_STATUS', '');
                 commit('SET_ID', '');
+                commit('SET_LOGINTIME', '');
                 removeToken();
                 return Promise.resolve(res);
             } catch(error){
