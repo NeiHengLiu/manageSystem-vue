@@ -12,7 +12,7 @@
                         <i class="el-icon-menu"></i>
                         <span slot="title">首页</span>
                     </el-menu-item>
-                    <el-submenu index="2" popper-class="submenu_bg">
+                    <!-- <el-submenu index="2" popper-class="submenu_bg">
                         <template slot="title">
                             <i class="el-icon-document"></i>
                             <span>数据管理</span>
@@ -58,6 +58,13 @@
                             <span>说明</span>
                         </template>
                         <el-menu-item index="instructions">说明</el-menu-item>
+                    </el-submenu> -->
+                    <el-submenu :index="(index+2)" popper-class="submenu_bg" v-for="(item, index) in menuList">
+                        <template slot="title">
+                            <i class="el-icon-document"></i>
+                            <span>{{ item.parent.title }}</span>
+                        </template>
+                        <el-menu-item :index="menuItem.path" v-for="menuItem in item.sub">{{ menuItem.title }}</el-menu-item>
                     </el-submenu>
                 </el-menu>
             </el-col>
@@ -75,6 +82,40 @@
         computed: {
             defaultActive () {
                 return this.$route.path.replace('/', '');
+            },
+            menuList () {
+                let menuData = this.$store.getters.addRouters;
+                let menuList = [];
+                let name = '';
+                let itemObj = {
+                    parent: {},
+                    sub: []
+                }
+                menuData.forEach((val, index, arr) => {
+                    if(val.meta.crumbs[0] === name){
+                        itemObj.sub.push({
+                            title: val.meta.crumbs[1],
+                            path: val.path.substr(1)
+                        });
+                        name = val.meta.crumbs[0];
+                    } else {
+                        if(val.meta.crumbs[0] !== name && name !== ''){
+                            menuList.push(itemObj);
+                            itemObj = {
+                                parent: {},
+                                sub: []
+                            }
+                        }
+                        itemObj.parent.title = val.meta.crumbs[0];
+                        itemObj.parent.icon = '';
+                        itemObj.sub.push({
+                            title: val.meta.crumbs[1],
+                            path: val.path.substr(1)
+                        });
+                        name = val.meta.crumbs[0];
+                    }
+                });
+                return menuList;
             }
         }
     }
