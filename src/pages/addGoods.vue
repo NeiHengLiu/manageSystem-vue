@@ -21,7 +21,7 @@
                             <el-input v-model="selectGoodsForm.speciesInfo"></el-input>
                         </el-form-item>
                         <el-form-item>
-                            <el-button type="primary" @click="submitFoodSpecies">提交</el-button>
+                            <el-button type="primary" @click="submitFoodSpecies" :loading="loading2">提交</el-button>
                         </el-form-item>
                     </div>
                 </el-row>
@@ -91,7 +91,7 @@
                     </el-row>
                 </template>
                 <el-form-item>
-                    <el-button type="primary" @click="submitAddGoodsForm('addGoodsForm')">确认添加食品</el-button>
+                    <el-button type="primary" @click="submitAddGoodsForm('addGoodsForm')" :loading="loading">确认添加食品</el-button>
                 </el-form-item>
             </el-form>
             <!--E 添加食品 -->
@@ -201,7 +201,9 @@
                 },
                 showEdit: false,
                 addScopeVisible: false,
-                foodSpecs: 'one'
+                foodSpecs: 'one',
+                loading: false,
+                loading2: false
             }
         },
         methods: {
@@ -218,6 +220,7 @@
                 let name = this.selectGoodsForm.speciesName.replace(/(^\s*)|(\s*$)/g, '');
                 let info = this.selectGoodsForm.speciesInfo.replace(/(^\s*)|(\s*$)/g, '');
                 if(!(name === '')){
+                    this.loading2 = !this.loading2;
                     let res = await addFoodTypes({speciesName: name, speciesInfo: info});
                     if(res.state === true){
                         this.$message({
@@ -228,6 +231,7 @@
                         this.showEdit = !this.showEdit;
                         this.selectGoodsForm.speciesName = '';
                         this.selectGoodsForm.speciesInfo = '';
+                        this.loading2 = !this.loading2;
                     }
                 } else {
                     this.$notify({
@@ -266,6 +270,7 @@
             async submitAddGoodsForm (formName) {    // 确认添加食品
                 this.$refs[formName].validate(async (valid) => {
                     if(valid){
+                        this.loading = !this.loading;
                         let res = await addGoods({...this.addGoodsForm,...this.selectGoodsForm});
                         if(res.state) {
                             this.$message({
@@ -282,6 +287,8 @@
                                 packExpense: 0,
                                 price: 0
                             }];
+
+                            this.loading = !this.loading;
                         }
                     } else {
                         this.$message({
