@@ -17,7 +17,7 @@ const userDistribution = r => require.ensure([], () => r(require('../pages/userD
 const richTextEditor = r => require.ensure([], () => r(require('../pages/richTextEditor')), 'richTextEditor');
 const settingUp = r => require.ensure([], () => r(require('../pages/settingUp')), 'settingUp');
 const instructions = r => require.ensure([], () => r(require('../pages/instructions')), 'instructions');
-const page_401 = r => require.ensure([], () => r(require('../pages/401')), '401');
+const page_404 = r => require.ensure([], () => r(require('../pages/404')), '404');
 
 // 通用路由
 export const commonRouters = [
@@ -231,11 +231,11 @@ export const asyncRouters = [
 		}
 	},
 	{
-		path: '/page_401',
-		component: page_401,
+		path: '/page_404',
+		component: page_404,
 		meta: {
 			role: ['general', 'admin'],
-			crumbs: ['权限提示']
+			crumbs: ['页面提示']
 		}
 	}
 ]

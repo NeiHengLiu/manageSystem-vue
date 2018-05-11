@@ -34,7 +34,7 @@ router.beforeEach((to, from, next) => {
                 if(hasPermission(to.meta.role, store.getters.roles)){
                     next();
                 } else {
-                    next({ path: '/page_401', replace: true });
+                    next({ path: '/page_404', replace: true });
                 }
             }
         }
