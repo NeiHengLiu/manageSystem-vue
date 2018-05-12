@@ -147,7 +147,8 @@ export const asyncRouters = [
 		component: userList,
 		meta: {
 			role: ['general', 'admin'],
-			crumbs: ['数据管理', '用户列表']
+			crumbs: ['数据管理', '用户列表'],
+			icon: ['el-icon-document']
 		}
 	},
 	{
@@ -187,7 +188,8 @@ export const asyncRouters = [
 		component: addShops,
 		meta: {
 			role: ['general', 'admin'],
-			crumbs: ['添加数据', '添加商铺']
+			crumbs: ['添加数据', '添加商铺'],
+			icon: ['el-icon-plus']
 		}
 	},
 	{
@@ -203,7 +205,8 @@ export const asyncRouters = [
 		component: userDistribution,
 		meta: {
 			role: ['general', 'admin'],
-			crumbs: ['图表', '用户分布']
+			crumbs: ['图表', '用户分布'],
+			icon: ['el-icon-star-on']
 		}
 	},
 	{
@@ -211,7 +214,8 @@ export const asyncRouters = [
 		component: richTextEditor,
 		meta: {
 			role: ['admin'],
-			crumbs: ['编辑', '文本编辑']
+			crumbs: ['编辑', '文本编辑'],
+			icon: ['el-icon-edit']
 		}
 	},
 	{
@@ -219,7 +223,8 @@ export const asyncRouters = [
 		component: settingUp,
 		meta: {
 			role: ['general', 'admin'],
-			crumbs: ['设置', '管理员设置']
+			crumbs: ['设置', '管理员设置'],
+			icon: ['el-icon-setting']
 		}
 	},
 	{
@@ -227,7 +232,8 @@ export const asyncRouters = [
 		component: instructions,
 		meta: {
 			role: ['general', 'admin'],
-			crumbs: ['说明', '说明']
+			crumbs: ['说明', '说明'],
+			icon: ['el-icon-warning']
 		}
 	},
 	{

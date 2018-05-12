@@ -61,7 +61,7 @@
                     </el-submenu> -->
                     <el-submenu :index="(index+2).toString()" popper-class="submenu_bg" v-for="(item, index) in menuList">
                         <template slot="title">
-                            <i class="el-icon-document"></i>
+                            <i :class="item.parent.icon"></i>
                             <span>{{ item.parent.title }}</span>
                         </template>
                         <el-menu-item :index="menuItem.path" v-for="menuItem in item.sub">{{ menuItem.title }}</el-menu-item>
@@ -91,6 +91,7 @@
                     parent: {},
                     sub: []
                 }
+
                 menuData.forEach((val, index, arr) => {
                     if(val.meta.crumbs[0] === name){
                         itemObj.sub.push({
@@ -107,7 +108,7 @@
                             }
                         }
                         itemObj.parent.title = val.meta.crumbs[0];
-                        itemObj.parent.icon = '';
+                        itemObj.parent.icon = val.meta.icon !== undefined ? val.meta.icon[0] : '';
                         itemObj.sub.push({
                             title: val.meta.crumbs[1],
                             path: val.path.substr(1)
@@ -115,6 +116,7 @@
                         name = val.meta.crumbs[0];
                     }
                 });
+
                 return menuList;
             }
         }
