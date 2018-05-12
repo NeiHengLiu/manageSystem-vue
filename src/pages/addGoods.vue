@@ -77,7 +77,7 @@
                     <el-row class="txt_center mrb_20">
                         <el-button type="primary" @click="addScopeVisible=true">添加规格</el-button>
                     </el-row>
-                    <el-row class="baseList_table_border">
+                    <el-row class="baseList_table_border mrb_20">
                         <el-table :data="addGoodsForm.specData" header-row-class-name="baseList_table_head">
                             <el-table-column label="规格" prop="specName"></el-table-column>
                             <el-table-column label="包装费" prop="packExpense"></el-table-column>
