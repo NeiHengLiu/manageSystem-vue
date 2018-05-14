@@ -9,7 +9,7 @@
         </div>
         <!--S 显示提交后返回的内容-->
         <el-dialog title="服务器返回的富文本编辑的内容" :visible.sync="dialogTableVisible">
-            <div v-html="backContent"></div>
+            <div class="txt" v-html="backContent"></div>
         </el-dialog>
         <!--E 显示提交后返回的内容-->
     </div>
@@ -62,6 +62,10 @@
     }
     .rich_text_editor .ql-snow .ql-tooltip{
         z-index: 99;
+    }
+    .rich_text_editor .txt{
+        word-break: break-all;
+        word-wrap: break-word;
     }
 </style>
 
