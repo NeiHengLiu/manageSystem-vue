@@ -7,8 +7,10 @@
 let baseUrl = '';
 
 if (process.env.NODE_ENV == 'development') {
+    // 开发环境
     baseUrl = 'https://www.easy-mock.com/mock/5aa8d3d82e74616d75917b9b/manageSystem-vue'
 } else if (process.env.NODE_ENV == 'production') {
+    // 生产环境
     baseUrl = 'https://www.easy-mock.com/mock/5aa8d3d82e74616d75917b9b/manageSystem-vue'
 }
 
